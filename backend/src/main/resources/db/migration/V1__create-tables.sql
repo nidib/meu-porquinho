@@ -84,8 +84,8 @@ CREATE TABLE IF NOT EXISTS "main"."financial_movement" (
 	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-	CONSTRAINT amount_must_not_be_zero CHECK ("amount" <> 0),
-	CONSTRAINT mandatory_frequency_when_end_date_is_defined CHECK (("end_date" IS NULL) OR ("frequency_id" IS NOT NULL)),
+	CONSTRAINT "amount_must_not_be_zero" CHECK ("amount" <> 0),
+	CONSTRAINT "mandatory_frequency_when_end_date_is_defined" CHECK (("end_date" IS NULL) OR ("frequency_id" IS NOT NULL)),
 
 	PRIMARY KEY ("id"),
 	FOREIGN KEY ("bank_account_id") REFERENCES "main"."bank_account" ("id") ON DELETE CASCADE,
