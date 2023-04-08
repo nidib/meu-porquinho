@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS "main"."category" (
 
 CREATE TABLE IF NOT EXISTS "main"."financial_movement" (
 	"id" UUID DEFAULT gen_random_uuid(),
-	"amount" BIGINT NOT NULL DEFAULT 0,
+	"amount" BIGINT NOT NULL,
 	"date" DATE NOT NULL,
 	"end_date" DATE,
 	"frequency_id" UUID,
