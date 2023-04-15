@@ -16,13 +16,17 @@ public class Postgres {
 		.configure()
 		.ignoreIfMissing()
 		.load();
+
 	private static final String SCHEMA = "main";
+
 	private static final String URL = Optional
 		.ofNullable(env.get("DB_URL"))
 		.orElseThrow(() -> new RuntimeException("Missing DB_URL"));
+
 	private static final String USER = Optional
 		.ofNullable(env.get("DB_USER"))
 		.orElseThrow(() -> new RuntimeException("Missing DB_USER"));
+
 	private static final String PASSWORD = Optional
 		.ofNullable(env.get("DB_PASSWORD"))
 		.orElseThrow(() -> new RuntimeException("Missing DB_PASSWORD"));
