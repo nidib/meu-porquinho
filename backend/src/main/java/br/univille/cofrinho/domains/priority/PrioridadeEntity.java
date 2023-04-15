@@ -14,13 +14,13 @@ public class PrioridadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "id")
-	protected UUID id;
+	private UUID id;
 
 	@Column(name = "nome")
-	protected String nome;
+	private String nome;
 
 	@Column(name = "grandeza")
-	protected int grandeza;
+	private int grandeza;
 
 	@Column(name = "criado_em")
 	@CreationTimestamp
@@ -29,5 +29,17 @@ public class PrioridadeEntity {
 	@Column(name = "atualizado_em")
 	@UpdateTimestamp
 	private Date atualizadoEm;
+
+	public UUID getId() {
+		return this.id;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public int getGrandeza() {
+		return this.grandeza;
+	}
 
 }
