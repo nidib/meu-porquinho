@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO "main"."frequency" ("id", "name", "level")
+INSERT INTO "main"."frequencia" ("id", "nome", "grandeza")
 	VALUES
 	('2ac06cde-755e-440f-90f7-4cbbeffa8e08', 'Diário', 0),
 	('184b3424-83bd-4d5d-b8ae-e8e0bd602eb7', 'Semanal', 1),
@@ -11,10 +11,11 @@ INSERT INTO "main"."frequency" ("id", "name", "level")
 	('dc1712a9-4336-437b-ac4d-ba56b2fe0236', 'Semestral', 6),
 	('a1103e4d-47b7-43fa-8847-9a1f2398d818', 'Anual', 7);
 
-INSERT INTO "main"."priority" ("id", "name", "level")
+INSERT INTO "main"."prioridade" ("id", "nome", "grandeza")
 	VALUES
-	('04c9bf1a-2a88-4ba4-b35e-9671623bfb71', 'Low', 0),
-	('5636d6e5-999a-4588-920c-7f42e80f63c8', 'Medium', 1),
-	('92fef7c8-ab6e-4ed5-a7df-a17dfa45d9d0', 'High', 2);
+	('04c9bf1a-2a88-4ba4-b35e-9671623bfb71', 'Baixa', 0),
+	('5636d6e5-999a-4588-920c-7f42e80f63c8', 'Normal', 1),
+	('92fef7c8-ab6e-4ed5-a7df-a17dfa45d9d0', 'Alta', 2),
+	('0cb8d34f-1ce0-4019-9611-b8a0696f994e', 'Crítica', 3);
 
 COMMIT;

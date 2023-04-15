@@ -5,7 +5,7 @@ public class PrioridadeMapper {
 	private PrioridadeMapper() {}
 
 	public static PrioridadeDTO paraDTO(PrioridadeEntity prioridadeEntity) {
-		return new PrioridadeDTO(prioridadeEntity.id, prioridadeEntity.nome, prioridadeEntity.ordem);
+		return new PrioridadeDTO(prioridadeEntity.id, prioridadeEntity.nome, prioridadeEntity.grandeza);
 	}
 
 }

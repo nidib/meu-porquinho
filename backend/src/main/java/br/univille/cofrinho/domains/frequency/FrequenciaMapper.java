@@ -5,7 +5,7 @@ public class FrequenciaMapper {
 	private FrequenciaMapper() {}
 
 	public static FrequenciaDTO paraDTO(FrequenciaEntity frequenciaEntity) {
-		return new FrequenciaDTO(frequenciaEntity.id, frequenciaEntity.nome, frequenciaEntity.ordem);
+		return new FrequenciaDTO(frequenciaEntity.id, frequenciaEntity.nome, frequenciaEntity.grandeza);
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "priority", schema = "main")
+@Table(name = "prioridade", schema = "main")
 public class PrioridadeEntity {
 
 	@Id
@@ -16,17 +16,17 @@ public class PrioridadeEntity {
 	@Column(name = "id")
 	protected UUID id;
 
-	@Column(name = "name")
+	@Column(name = "nome")
 	protected String nome;
 
-	@Column(name = "level")
-	protected int ordem;
+	@Column(name = "grandeza")
+	protected int grandeza;
 
-	@Column(name = "created_at")
+	@Column(name = "criado_em")
 	@CreationTimestamp
 	private Date criadoEm;
 
-	@Column(name = "updated_at")
+	@Column(name = "atualizado_em")
 	@UpdateTimestamp
 	private Date atualizadoEm;
 
