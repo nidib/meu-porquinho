@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface FrequenciaRepository extends JpaRepository<FrequenciaEntity, UUID> {
-	
-}
+public interface FrequenciaRepository extends JpaRepository<FrequenciaEntity, UUID> {}

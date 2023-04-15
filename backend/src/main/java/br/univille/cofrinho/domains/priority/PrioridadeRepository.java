@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface PrioridadeRepository extends JpaRepository<PrioridadeEntity, UUID> {
-}
+public interface PrioridadeRepository extends JpaRepository<PrioridadeEntity, UUID> {}
