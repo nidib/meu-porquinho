@@ -4,10 +4,11 @@ import br.univille.cofrinho.domains.frequency.FrequenciaDTO;
 import br.univille.cofrinho.domains.frequency.FrequenciaMapper;
 import br.univille.cofrinho.domains.frequency.FrequenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/frequencia")
@@ -17,11 +18,13 @@ public class FrequenciaController {
 	private FrequenciaService frequenciaService;
 
 	@GetMapping
-	public List<FrequenciaDTO> obterTodasAsFrequencias(){
-		return this.frequenciaService.obterTodasAsFrequecias()
+	public ResponseEntity<List<FrequenciaDTO>> listarTodasAsFrequencias(){
+		List<FrequenciaDTO> frequencias = this.frequenciaService.obterTodasAsFrequencias()
 			.stream()
 			.map(FrequenciaMapper::paraDTO)
-			.collect(Collectors.toList());
+			.toList();
+
+		return new ResponseEntity<>(frequencias, HttpStatus.OK);
 	}
 
 }

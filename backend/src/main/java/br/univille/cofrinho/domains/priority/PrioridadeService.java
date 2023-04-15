@@ -11,7 +11,7 @@ public class PrioridadeService {
 	@Autowired
 	private PrioridadeRepository prioridadeRepository;
 
-	public List<PrioridadeEntity> obterTodasPrioridades() {
+	public List<PrioridadeEntity> obterTodasAsPrioridades() {
 		return prioridadeRepository.findAll();
 	}
 

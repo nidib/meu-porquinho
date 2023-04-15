@@ -11,7 +11,7 @@ public class FrequenciaService {
 	@Autowired
 	private FrequenciaRepository frequenciaRepository;
 	
-	public List<FrequenciaEntity> obterTodasAsFrequecias(){
+	public List<FrequenciaEntity> obterTodasAsFrequencias(){
 		return this.frequenciaRepository.findAll();
 	}
 
