@@ -11,11 +11,11 @@ public class FrequenciaService {
 
 	@Autowired
 	private FrequenciaRepository frequenciaRepository;
-	
-	public List<FrequenciaEntity> obterTodasAsFrequencias(){
-		Sort ordenarCrescentePorOrdem = Sort.by(Sort.Direction.ASC, "ordem");
 
-		return this.frequenciaRepository.findAll(ordenarCrescentePorOrdem);
+	public List<FrequenciaEntity> obterTodasAsFrequencias(){
+		Sort ordenarCrescentePorGrandeza = Sort.by(Sort.Direction.ASC, "grandeza");
+
+		return this.frequenciaRepository.findAll(ordenarCrescentePorGrandeza);
 	}
 
 }

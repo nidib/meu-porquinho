@@ -8,26 +8,38 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "priority", schema = "main")
+@Table(name = "prioridade", schema = "main")
 public class PrioridadeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "id")
-	protected UUID id;
+	private UUID id;
 
-	@Column(name = "name")
-	protected String nome;
+	@Column(name = "nome")
+	private String nome;
 
-	@Column(name = "level")
-	protected int ordem;
+	@Column(name = "grandeza")
+	private int grandeza;
 
-	@Column(name = "created_at")
+	@Column(name = "criado_em")
 	@CreationTimestamp
 	private Date criadoEm;
 
-	@Column(name = "updated_at")
+	@Column(name = "atualizado_em")
 	@UpdateTimestamp
 	private Date atualizadoEm;
+
+	public UUID getId() {
+		return this.id;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public int getGrandeza() {
+		return this.grandeza;
+	}
 
 }

@@ -13,9 +13,9 @@ public class PrioridadeService {
 	private PrioridadeRepository prioridadeRepository;
 
 	public List<PrioridadeEntity> obterTodasAsPrioridades() {
-		Sort ordenarCrescentePorOrdem = Sort.by(Sort.Direction.ASC, "ordem");
+		Sort ordenarCrescentePorGrandeza = Sort.by(Sort.Direction.ASC, "grandeza");
 
-		return prioridadeRepository.findAll(ordenarCrescentePorOrdem);
+		return prioridadeRepository.findAll(ordenarCrescentePorGrandeza);
 	}
 
 }
