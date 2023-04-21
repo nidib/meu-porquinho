@@ -1,8 +1,8 @@
 package br.univille.cofrinho.controllers;
 
-import br.univille.cofrinho.domains.priority.PrioridadeDTO;
-import br.univille.cofrinho.domains.priority.PrioridadeMapper;
-import br.univille.cofrinho.domains.priority.PrioridadeService;
+import br.univille.cofrinho.domains.prioridade.PrioridadeDTO;
+import br.univille.cofrinho.domains.prioridade.PrioridadeMapper;
+import br.univille.cofrinho.domains.prioridade.PrioridadeService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

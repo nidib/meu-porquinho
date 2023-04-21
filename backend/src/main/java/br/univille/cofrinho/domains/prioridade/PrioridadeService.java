@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.frequency;
+package br.univille.cofrinho.domains.prioridade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FrequenciaService {
+public class PrioridadeService {
 
 	@Autowired
-	private FrequenciaRepository frequenciaRepository;
+	private PrioridadeRepository prioridadeRepository;
 
-	public List<FrequenciaEntity> obterTodasAsFrequencias(){
+	public List<PrioridadeEntity> obterTodasAsPrioridades() {
 		Sort ordenarCrescentePorGrandeza = Sort.by(Sort.Direction.ASC, "grandeza");
 
-		return this.frequenciaRepository.findAll(ordenarCrescentePorGrandeza);
+		return prioridadeRepository.findAll(ordenarCrescentePorGrandeza);
 	}
 
 }

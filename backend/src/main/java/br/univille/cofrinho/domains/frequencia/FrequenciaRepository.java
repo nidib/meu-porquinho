@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.frequency;
+package br.univille.cofrinho.domains.frequencia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

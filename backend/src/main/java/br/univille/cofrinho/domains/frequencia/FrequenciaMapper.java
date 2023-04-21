@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.frequency;
+package br.univille.cofrinho.domains.frequencia;
 
 public class FrequenciaMapper {
 

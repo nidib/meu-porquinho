@@ -1,8 +1,8 @@
 package br.univille.cofrinho.controllers;
 
-import br.univille.cofrinho.domains.frequency.FrequenciaDTO;
-import br.univille.cofrinho.domains.frequency.FrequenciaMapper;
-import br.univille.cofrinho.domains.frequency.FrequenciaService;
+import br.univille.cofrinho.domains.frequencia.FrequenciaDTO;
+import br.univille.cofrinho.domains.frequencia.FrequenciaMapper;
+import br.univille.cofrinho.domains.frequencia.FrequenciaService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

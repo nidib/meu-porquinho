@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.user;
+package br.univille.cofrinho.domains.usuario;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,28 +25,28 @@ public class UsuarioEntity {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "criado_em")
 	@CreationTimestamp
+	@Column(name = "criado_em")
 	private Date criadoEm;
 
-	@Column(name = "atualizado_em")
 	@UpdateTimestamp
+	@Column(name = "atualizado_em")
 	private Date atualizadoEm;
 
 	public UUID getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getLogin() {
-		return login;
+		return this.login;
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 }
