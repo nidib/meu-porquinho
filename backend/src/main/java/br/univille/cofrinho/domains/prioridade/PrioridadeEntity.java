@@ -3,8 +3,9 @@ package br.univille.cofrinho.domains.prioridade;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -24,11 +25,13 @@ public class PrioridadeEntity {
 
 	@CreationTimestamp
 	@Column(name = "criado_em")
-	private Date criadoEm;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime criadoEm;
 
 	@UpdateTimestamp
 	@Column(name = "atualizado_em")
-	private Date atualizadoEm;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime atualizadoEm;
 
 	public UUID getId() {
 		return this.id;
