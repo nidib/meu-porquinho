@@ -1,10 +1,12 @@
 package br.univille.cofrinho.domains.usuario;
 
+import br.univille.cofrinho.domains.perfil.PerfilEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -25,13 +27,18 @@ public class UsuarioEntity {
 	@Column(name = "email")
 	private String email;
 
+	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+	private PerfilEntity perfil;
+
 	@CreationTimestamp
 	@Column(name = "criado_em")
-	private Date criadoEm;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime criadoEm;
 
 	@UpdateTimestamp
 	@Column(name = "atualizado_em")
-	private Date atualizadoEm;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime atualizadoEm;
 
 	public UUID getId() {
 		return this.id;
