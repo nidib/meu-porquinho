@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.priority;
+package br.univille.cofrinho.domains.prioridade;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

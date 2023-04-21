@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.priority;
+package br.univille.cofrinho.domains.prioridade;
 
 public class PrioridadeMapper {
 
