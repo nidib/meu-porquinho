@@ -31,13 +31,12 @@ public class LoginController {
 	}
 
 	@PostMapping
-	@Operation(description = "Fazer login. Setando um cookie com a chave de autenticação")
+	@Operation(description = "Fazer login, setando um cookie com a chave de autenticação")
 	public ResponseEntity<Object> login(@RequestBody LoginReqDTO loginInfo, HttpServletResponse response) {
-		UsuarioEntity usuario = this.usuarioService
-			.obterPorLoginESenha(loginInfo.login(), loginInfo.senha())
-			.orElseThrow(LoginOuSenhaInvalidos::new);
+		UsuarioEntity usuario = this.usuarioService.obterPorLoginESenha(loginInfo.login(), loginInfo.senha());
+		Cookie cookieDeAutenticacao = new Cookie("auth", tokenService.gerarToken(usuario));
 
-		response.addCookie(new Cookie("auth", tokenService.gerarToken(usuario)));
+		response.addCookie(cookieDeAutenticacao);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
