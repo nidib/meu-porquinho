@@ -6,8 +6,8 @@ public class RegraDeNegocioException extends RuntimeException {
 
 	private final HttpStatus codigoHttp;
 
-	public RegraDeNegocioException(String message, HttpStatus codigoHttp) {
-		super(message);
+	public RegraDeNegocioException(String mensagem, HttpStatus codigoHttp) {
+		super(mensagem);
 		this.codigoHttp = codigoHttp;
 	}
 

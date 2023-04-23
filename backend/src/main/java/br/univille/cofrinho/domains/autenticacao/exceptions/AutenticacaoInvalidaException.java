@@ -9,8 +9,8 @@ public class AutenticacaoInvalidaException extends RegraDeNegocioException {
 		super("Autenticação inválida", HttpStatus.UNAUTHORIZED);
 	}
 
-	public AutenticacaoInvalidaException(String message) {
-		super(message, HttpStatus.UNAUTHORIZED);
+	public AutenticacaoInvalidaException(String mensagem) {
+		super(mensagem, HttpStatus.UNAUTHORIZED);
 	}
 
 }
