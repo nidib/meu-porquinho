@@ -1,5 +1,6 @@
 package br.univille.cofrinho.databases;
 
+import br.univille.cofrinho.exceptions.VariavelDeAmbienteNaoConfiguradaException;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
@@ -21,15 +22,15 @@ public class Postgres {
 
 	private static final String URL = Optional
 		.ofNullable(env.get("DB_URL"))
-		.orElseThrow(() -> new RuntimeException("Missing DB_URL"));
+		.orElseThrow(() -> new VariavelDeAmbienteNaoConfiguradaException("DB_URL"));
 
 	private static final String USER = Optional
 		.ofNullable(env.get("DB_USER"))
-		.orElseThrow(() -> new RuntimeException("Missing DB_USER"));
+		.orElseThrow(() -> new VariavelDeAmbienteNaoConfiguradaException("DB_USER"));
 
 	private static final String PASSWORD = Optional
 		.ofNullable(env.get("DB_PASSWORD"))
-		.orElseThrow(() -> new RuntimeException("Missing DB_PASSWORD"));
+		.orElseThrow(() -> new VariavelDeAmbienteNaoConfiguradaException("DB_PASSWORD"));
 
 	@Bean
 	public DataSource dataSource() {

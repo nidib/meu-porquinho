@@ -1,6 +1,7 @@
 package br.univille.cofrinho.domains.autenticacao;
 
 import br.univille.cofrinho.domains.usuario.UsuarioEntity;
+import br.univille.cofrinho.exceptions.VariavelDeAmbienteNaoConfiguradaException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -34,7 +35,7 @@ public class TokenService {
 		this.chaveClaim = "id";
 		this.chave = Optional
 			.ofNullable(env.get("JWT_KEY"))
-			.orElseThrow(() -> new RuntimeException("Missing JWT_KEY"));
+			.orElseThrow(() -> new VariavelDeAmbienteNaoConfiguradaException("JWT_KEY"));
 
 		this.verificadorJwt = JWT
 			.require(Algorithm.HMAC256(this.chave))

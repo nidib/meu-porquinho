@@ -1,9 +1,8 @@
 package br.univille.cofrinho.domains.usuario;
 
+import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -15,10 +14,8 @@ public class UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 
-	public Optional<UsuarioEntity> obterPorLoginESenha(String login, String senha) {
-		return Optional.ofNullable(
-			this.usuarioRepository.findByLoginAndSenha(login, senha)
-		);
+	public UsuarioEntity obterPorLoginESenha(String login, String senha) {
+		return this.usuarioRepository.findByLoginAndSenha(login, senha).orElseThrow(LoginOuSenhaInvalidos::new);
 	}
 
 }
