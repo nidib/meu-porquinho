@@ -8,8 +8,12 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
+	private final UsuarioRepository usuarioRepository;
+
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	public UsuarioService(UsuarioRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
+	}
 
 	public Optional<UsuarioEntity> obterPorLoginESenha(String login, String senha) {
 		return Optional.ofNullable(

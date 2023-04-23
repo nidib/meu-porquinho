@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,9 +15,12 @@ import java.util.*;
 @Component
 public class AutenticacaoInterceptor implements HandlerInterceptor {
 
-	@Autowired
-	private CookieService cookieService;
+	private final CookieService cookieService;
 
+	@Autowired
+	public AutenticacaoInterceptor(CookieService cookieService) {
+		this.cookieService = cookieService;
+	}
 
 	@Override
 	public boolean preHandle(
@@ -30,7 +34,7 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 		UUID usuarioIdLogado = this.cookieService.obterUsuarioId(request);
 
 		request.setAttribute(
-			UsuarioLogadoHandlerMethodArgumentResolver.CURRENT_USER_ATTRIBUTE,
+			UsuarioLogadoHandlerMethodArgumentResolver.usuarioLogadoIdChave,
 			usuarioIdLogado.toString()
 		);
 

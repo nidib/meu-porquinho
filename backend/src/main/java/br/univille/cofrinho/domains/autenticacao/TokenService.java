@@ -16,46 +16,50 @@ import java.util.UUID;
 @Service
 public class TokenService {
 
-	private static final Dotenv env = Dotenv
-		.configure()
-		.ignoreIfMissing()
-		.load();
+	private final String issuer;
 
-	private final String ISSUER = "Cofrinho";
+	private final String chave;
 
-	private final String CHAVE = Optional
-		.ofNullable(env.get("JWT_KEY"))
-		.orElseThrow(() -> new RuntimeException("Missing JWT_KEY"));
-
-	private final String CHAVE_CLAIM = "id";
+	private final String chaveClaim;
 
 	private final JWTVerifier verificadorJwt;
 
 	public TokenService() {
+		Dotenv env = Dotenv
+			.configure()
+			.ignoreIfMissing()
+			.load();
+
+		this.issuer = "Cofrinho";
+		this.chaveClaim = "id";
+		this.chave = Optional
+			.ofNullable(env.get("JWT_KEY"))
+			.orElseThrow(() -> new RuntimeException("Missing JWT_KEY"));
+
 		this.verificadorJwt = JWT
-			.require(Algorithm.HMAC256(this.CHAVE))
+			.require(Algorithm.HMAC256(this.chave))
 			.build();
 	}
 
 	public String gerarToken(UsuarioEntity usuario) {
 		return JWT
 			.create()
-			.withIssuer(this.ISSUER)
+			.withIssuer(this.issuer)
 			.withSubject(usuario.getLogin())
-			.withClaim(this.CHAVE_CLAIM, usuario.getId().toString())
+			.withClaim(this.chaveClaim, usuario.getId().toString())
 			.withExpiresAt(
 				LocalDateTime
 					.now()
 					.plusDays(1)
 					.toInstant(ZoneOffset.of("-03:00"))
 			)
-			.sign(Algorithm.HMAC256(this.CHAVE));
+			.sign(Algorithm.HMAC256(this.chave));
 	}
 
 	public Optional<UUID> validarToken(String token) {
 		try {
 			return Optional.of(
-				this.verificadorJwt.verify(token).getClaim(this.CHAVE_CLAIM).as(UUID.class)
+				this.verificadorJwt.verify(token).getClaim(this.chaveClaim).as(UUID.class)
 			);
 		} catch (JWTVerificationException exception) {
 			return Optional.empty();

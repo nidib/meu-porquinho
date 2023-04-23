@@ -6,8 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PerfilService {
 
+	private final PerfilRepository perfilRepository;
+
 	@Autowired
-	private PerfilRepository perfilRepository;
+	public PerfilService(PerfilRepository perfilRepository) {
+		this.perfilRepository = perfilRepository;
+	}
 
 	public PerfilEntity create(PerfilEntity perfil) {
 		return this.perfilRepository.save(perfil);

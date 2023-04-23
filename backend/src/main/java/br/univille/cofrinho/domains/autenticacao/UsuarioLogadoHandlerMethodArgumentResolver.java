@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class UsuarioLogadoHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-	protected static final String CURRENT_USER_ATTRIBUTE = "usuarioIdLogado";
+	protected static final String usuarioLogadoIdChave = "usuarioLogadoId";
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -41,7 +41,7 @@ public class UsuarioLogadoHandlerMethodArgumentResolver implements HandlerMethod
 		@Nullable WebDataBinderFactory binderFactory) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
-		return UUID.fromString(request.getAttribute(CURRENT_USER_ATTRIBUTE).toString());
+		return UUID.fromString(request.getAttribute(usuarioLogadoIdChave).toString());
 	}
 
 }

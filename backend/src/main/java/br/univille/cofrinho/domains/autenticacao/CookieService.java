@@ -13,8 +13,12 @@ import java.util.UUID;
 @Service
 public class CookieService {
 
+	private final TokenService tokenService;
+
 	@Autowired
-	private TokenService tokenService;
+	public CookieService(TokenService tokenService) {
+		this.tokenService = tokenService;
+	}
 
 	public UUID obterUsuarioId(HttpServletRequest request) {
 		Cookie cookieDeAutenticacao = this.obterCookieDeAutenticacao(request.getCookies());

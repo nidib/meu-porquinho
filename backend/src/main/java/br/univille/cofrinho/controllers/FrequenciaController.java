@@ -17,8 +17,12 @@ import java.util.List;
 @RequestMapping("api/frequencia")
 public class FrequenciaController {
 
+	private final FrequenciaService frequenciaService;
+
 	@Autowired
-	private FrequenciaService frequenciaService;
+	public FrequenciaController(FrequenciaService frequenciaService) {
+		this.frequenciaService = frequenciaService;
+	}
 
 	@GetMapping
 	@Operation(description = "Lista todas as frequências")

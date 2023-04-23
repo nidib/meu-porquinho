@@ -11,8 +11,15 @@ import java.util.List;
 @Configuration
 public class AutenticacaoConfig implements WebMvcConfigurer {
 
+	private final AutenticacaoInterceptor autenticacaoInterceptor;
+
+	private final UsuarioLogadoHandlerMethodArgumentResolver usuarioLogadoHandlerMethodArgumentResolver;
+
 	@Autowired
-	private AutenticacaoInterceptor autenticacaoInterceptor;
+	public AutenticacaoConfig(AutenticacaoInterceptor autenticacaoInterceptor) {
+		this.autenticacaoInterceptor = autenticacaoInterceptor;
+		this.usuarioLogadoHandlerMethodArgumentResolver = new UsuarioLogadoHandlerMethodArgumentResolver();
+	}
 
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry
@@ -22,7 +29,7 @@ public class AutenticacaoConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-		resolvers.add(new UsuarioLogadoHandlerMethodArgumentResolver());
+		resolvers.add(this.usuarioLogadoHandlerMethodArgumentResolver);
 	}
 
 }

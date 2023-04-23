@@ -5,7 +5,6 @@ import br.univille.cofrinho.domains.prioridade.PrioridadeDTO;
 import br.univille.cofrinho.domains.prioridade.PrioridadeMapper;
 import br.univille.cofrinho.domains.prioridade.PrioridadeService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +19,16 @@ import java.util.List;
 @RequestMapping("api/prioridade")
 public class PrioridadeController {
 
+	private final PrioridadeService prioridadeService;
+
 	@Autowired
-	private PrioridadeService prioridadeService;
+	public PrioridadeController(PrioridadeService prioridadeService) {
+		this.prioridadeService = prioridadeService;
+	}
 
 	@GetMapping
 	@Operation(description = "Lista todas as prioridades")
-	public ResponseEntity<List<PrioridadeDTO>> listarTodasAsPrioridades(HttpServletRequest request) {
+	public ResponseEntity<List<PrioridadeDTO>> listarTodasAsPrioridades() {
 		List<PrioridadeDTO> prioridades = prioridadeService.obterTodasAsPrioridades()
 			.stream()
 			.map(PrioridadeMapper::paraDTO)
