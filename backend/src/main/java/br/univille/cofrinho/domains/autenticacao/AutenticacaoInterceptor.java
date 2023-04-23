@@ -4,8 +4,6 @@ import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,10 +21,7 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(
-		@NonNull HttpServletRequest request,
-		@NonNull HttpServletResponse response,
-		@NonNull Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if (!this.rotaExiste(handler) || !this.rotaPrecisaDeAutenticacao(handler)) {
 			return true;
 		}
@@ -48,7 +43,7 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 	private boolean rotaPrecisaDeAutenticacao(Object rota) {
 		HandlerMethod rotaHandler = (HandlerMethod) rota;
 
-		if (rotaHandler.getBean().getClass().getAnnotation(PrecisaEstarLogado.class) != null) {
+		if (rotaHandler.getMethod().getDeclaringClass().getAnnotation(PrecisaEstarLogado.class) != null) {
 			return true;
 		}
 

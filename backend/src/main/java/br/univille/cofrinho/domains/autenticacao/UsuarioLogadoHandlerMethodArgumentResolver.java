@@ -4,8 +4,6 @@ import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -34,11 +32,7 @@ public class UsuarioLogadoHandlerMethodArgumentResolver implements HandlerMethod
 	}
 
 	@Override
-	public Object resolveArgument(
-		@NonNull MethodParameter parameter,
-		@Nullable ModelAndViewContainer mavContainer,
-		@NonNull NativeWebRequest webRequest,
-		@Nullable WebDataBinderFactory binderFactory) throws Exception {
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
 		return UUID.fromString(request.getAttribute(usuarioLogadoIdChave).toString());
