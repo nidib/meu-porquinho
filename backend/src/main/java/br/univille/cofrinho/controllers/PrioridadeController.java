@@ -1,5 +1,6 @@
 package br.univille.cofrinho.controllers;
 
+import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.prioridade.PrioridadeDTO;
 import br.univille.cofrinho.domains.prioridade.PrioridadeMapper;
 import br.univille.cofrinho.domains.prioridade.PrioridadeService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@PrecisaEstarLogado
 @RestController
 @RequestMapping("api/prioridade")
 public class PrioridadeController {

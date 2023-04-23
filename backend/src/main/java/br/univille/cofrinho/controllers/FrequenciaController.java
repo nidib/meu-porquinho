@@ -1,5 +1,6 @@
 package br.univille.cofrinho.controllers;
 
+import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.frequencia.FrequenciaDTO;
 import br.univille.cofrinho.domains.frequencia.FrequenciaMapper;
 import br.univille.cofrinho.domains.frequencia.FrequenciaService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@PrecisaEstarLogado
 @RestController
 @RequestMapping("api/frequencia")
 public class FrequenciaController {

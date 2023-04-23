@@ -2,10 +2,11 @@ package br.univille.cofrinho.controllers;
 
 import br.univille.cofrinho.domains.autenticacao.TokenService;
 import br.univille.cofrinho.domains.autenticacao.dtos.LoginReqDTO;
-import br.univille.cofrinho.domains.autenticacao.dtos.LoginResDTO;
 import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidos;
 import br.univille.cofrinho.domains.usuario.UsuarioEntity;
 import br.univille.cofrinho.domains.usuario.UsuarioService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +26,14 @@ public class LoginController {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity<LoginResDTO> login(@RequestBody LoginReqDTO loginInfo) {
+	public ResponseEntity<Object> login(@RequestBody LoginReqDTO loginInfo, HttpServletResponse response) {
 		UsuarioEntity usuario = this.usuarioService
 			.obterPorLoginESenha(loginInfo.login(), loginInfo.senha())
 			.orElseThrow(LoginOuSenhaInvalidos::new);
 
-		return new ResponseEntity<>(
-			new LoginResDTO(tokenService.gerarToken(usuario)),
-			HttpStatus.OK
-		);
+		response.addCookie(new Cookie("auth", tokenService.gerarToken(usuario)));
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

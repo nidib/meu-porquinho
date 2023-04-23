@@ -21,9 +21,9 @@ public class ErrorController {
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	public ResponseEntity<ErrorResDTO> excessaoPorRotaNaoEcontrada(Exception exception) {
+	public ResponseEntity<ErrorResDTO> excessaoPorMetodoNaoSuportado(HttpRequestMethodNotSupportedException exception) {
 		return new ResponseEntity<>(
-			new ErrorResDTO("Método não suportado"),
+			new ErrorResDTO("Método " + exception.getMethod() + " não suportado"),
 			HttpStatus.NOT_FOUND
 		);
 	}
