@@ -1,5 +1,6 @@
 package br.univille.cofrinho.controllers;
 
+import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.frequencia.FrequenciaDTO;
 import br.univille.cofrinho.domains.frequencia.FrequenciaMapper;
 import br.univille.cofrinho.domains.frequencia.FrequenciaService;
@@ -11,12 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@PrecisaEstarLogado
 @RestController
-@RequestMapping("/frequencia")
+@RequestMapping("api/frequencia")
 public class FrequenciaController {
 
+	private final FrequenciaService frequenciaService;
+
 	@Autowired
-	private FrequenciaService frequenciaService;
+	public FrequenciaController(FrequenciaService frequenciaService) {
+		this.frequenciaService = frequenciaService;
+	}
 
 	@GetMapping
 	@Operation(description = "Lista todas as frequências")

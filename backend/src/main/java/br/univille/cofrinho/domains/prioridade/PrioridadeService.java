@@ -9,8 +9,12 @@ import java.util.List;
 @Service
 public class PrioridadeService {
 
+	private final PrioridadeRepository prioridadeRepository;
+
 	@Autowired
-	private PrioridadeRepository prioridadeRepository;
+	public PrioridadeService(PrioridadeRepository prioridadeRepository) {
+		this.prioridadeRepository = prioridadeRepository;
+	}
 
 	public List<PrioridadeEntity> obterTodasAsPrioridades() {
 		Sort ordenarCrescentePorGrandeza = Sort.by(Sort.Direction.ASC, "grandeza");

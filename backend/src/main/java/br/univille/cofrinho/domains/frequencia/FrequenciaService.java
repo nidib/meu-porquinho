@@ -9,8 +9,12 @@ import java.util.List;
 @Service
 public class FrequenciaService {
 
+	private final FrequenciaRepository frequenciaRepository;
+
 	@Autowired
-	private FrequenciaRepository frequenciaRepository;
+	public FrequenciaService(FrequenciaRepository frequenciaRepository) {
+		this.frequenciaRepository = frequenciaRepository;
+	}
 
 	public List<FrequenciaEntity> obterTodasAsFrequencias(){
 		Sort ordenarCrescentePorGrandeza = Sort.by(Sort.Direction.ASC, "grandeza");

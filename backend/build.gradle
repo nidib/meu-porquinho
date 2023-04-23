@@ -19,6 +19,7 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'io.github.cdimascio:dotenv-java:2.3.2'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
