@@ -1,5 +1,7 @@
 package br.univille.cofrinho.controllers.error.dtos;
 
+import java.util.Set;
+
 public record ErrorResDTO(
-	String message
+	Set<String> erros
 ) {}
