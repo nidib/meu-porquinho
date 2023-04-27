@@ -18,4 +18,8 @@ public class UsuarioService {
 		return this.usuarioRepository.findByLoginAndSenha(login, senha).orElseThrow(LoginOuSenhaInvalidos::new);
 	}
 
+	public void criarUsuario(String login, String email, String senha){
+		this.usuarioRepository.save(new UsuarioEntity(login, senha, email));
+	}
+
 }

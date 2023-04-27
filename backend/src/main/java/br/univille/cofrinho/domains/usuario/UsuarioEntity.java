@@ -40,6 +40,18 @@ public class UsuarioEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime atualizadoEm;
 
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public UUID getId() {
 		return this.id;
 	}
