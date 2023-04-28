@@ -25,7 +25,7 @@ public class UsuarioController {
 	@PostMapping
 	@Operation(description = "Cria um usuário")
 	public ResponseEntity<Object> criaUsuario(@RequestBody UsuarioEntity usuarioInfo){
-		UsuarioEntity usuario = this.usuarioService.criarUsuario(usuarioInfo.getLogin(), usuarioInfo.getEmail(), usuarioInfo.getSenha()));
+		this.usuarioService.criarUsuario(usuarioInfo.getLogin(), usuarioInfo.getEmail(), usuarioInfo.getSenha());
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

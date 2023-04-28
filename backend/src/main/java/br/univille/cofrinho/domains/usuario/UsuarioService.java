@@ -20,6 +20,7 @@ public class UsuarioService {
 
 	public void criarUsuario(String login, String email, String senha){
 		this.usuarioRepository.save(new UsuarioEntity(login, senha, email));
+
 	}
 
 }
