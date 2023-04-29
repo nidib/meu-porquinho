@@ -3,7 +3,7 @@ package br.univille.cofrinho.controllers.usuario.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record UsuarioReqDTO(
+public record CriarUsuarioReqDTO(
 	@NotNull(message = "login é obrigatório")
 	@NotBlank(message = "login é obrigatório")
 	String login,
