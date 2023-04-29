@@ -6,5 +6,4 @@ public record EditarPerfilResDTO(
 	String nomeCompleto,
 	LocalDate dataDeNascimento,
 	String apelido
-) {
-}
+) {}

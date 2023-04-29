@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Past;
 import java.time.LocalDate;
 
 public record EditarPerfilReqDTO (
-
 	@Nullable
 	String nomeCompleto,
 	@Nullable
@@ -14,6 +13,4 @@ public record EditarPerfilReqDTO (
 	LocalDate dataDeNascimento,
 	@Nullable
 	String apelido
-
-) {
-}
+) {}
