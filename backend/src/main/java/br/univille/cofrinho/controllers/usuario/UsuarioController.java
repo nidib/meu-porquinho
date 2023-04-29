@@ -1,9 +1,13 @@
 package br.univille.cofrinho.controllers.usuario;
 
-import br.univille.cofrinho.controllers.usuario.dtos.UsuarioReqDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.UsuarioResDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilReqDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilResDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioReqDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioResDTO;
 import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.autenticacao.annotations.UsuarioLogadoId;
+import br.univille.cofrinho.domains.perfil.PerfilEntity;
+import br.univille.cofrinho.domains.perfil.PerfilService;
 import br.univille.cofrinho.domains.usuario.UsuarioEntity;
 import br.univille.cofrinho.domains.usuario.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,18 +26,21 @@ public class UsuarioController {
 
 	private final UsuarioService usuarioService;
 
+	private final PerfilService perfilService;
+
 	@Autowired
-	public UsuarioController(UsuarioService usuarioService) {
+	public UsuarioController(UsuarioService usuarioService, PerfilService perfilService) {
 		this.usuarioService = usuarioService;
+		this.perfilService = perfilService;
 	}
 
 	@PostMapping
 	@Operation(description = "Cria um usuário")
-	public ResponseEntity<UsuarioResDTO> criaUsuario(@Valid @RequestBody UsuarioReqDTO usuarioInfo) {
+	public ResponseEntity<CriarUsuarioResDTO> criaUsuario(@Valid @RequestBody CriarUsuarioReqDTO usuarioInfo) {
 		UsuarioEntity usuarioNovo = this.usuarioService.criarUsuario(usuarioInfo.login(), usuarioInfo.email(), usuarioInfo.senha());
 
 		return new ResponseEntity<>(
-			new UsuarioResDTO(usuarioNovo.getId(), usuarioNovo.getLogin(), usuarioNovo.getEmail()),
+			new CriarUsuarioResDTO(usuarioNovo.getId(), usuarioNovo.getLogin(), usuarioNovo.getEmail()),
 			HttpStatus.CREATED
 		);
 	}
@@ -45,6 +52,23 @@ public class UsuarioController {
 		this.usuarioService.deletarPorId(id);
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@PrecisaEstarLogado
+	@PostMapping("/perfil")
+	@Operation(description = "Edita perfil do usuário logado")
+	public ResponseEntity<EditarPerfilResDTO> editarPerfil(@Valid @RequestBody EditarPerfilReqDTO perfil, @UsuarioLogadoId UUID usuarioLogadoId) {
+		PerfilEntity perfilEditado = this.perfilService.atualizar(
+			usuarioLogadoId,
+			perfil.nomeCompleto(),
+			perfil.dataDeNascimento(),
+			perfil.apelido()
+		);
+
+		return new ResponseEntity<>(
+			new EditarPerfilResDTO(perfilEditado.getNomeCompleto(), perfilEditado.getDataDeNascimento(), perfilEditado.getApelido()),
+			HttpStatus.OK
+		);
 	}
 
 }

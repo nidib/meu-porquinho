@@ -43,6 +43,21 @@ public class PerfilEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime atualizadoEm;
 
+	public PerfilEntity() {}
+
+	public PerfilEntity(UUID id, String nomeCompleto, LocalDate dataDeNascimento, String apelido, LocalDateTime criadoEm, UsuarioEntity usuario) {
+		this.id = id;
+		this.nomeCompleto = nomeCompleto;
+		this.dataDeNascimento = dataDeNascimento;
+		this.apelido = apelido;
+		this.criadoEm = criadoEm;
+		this.usuario = usuario;
+	}
+
+	public PerfilEntity(UsuarioEntity usuario) {
+		this.usuario = usuario;
+	}
+
 	public UUID getId() {
 		return id;
 	}
@@ -61,6 +76,10 @@ public class PerfilEntity {
 
 	public UsuarioEntity getUsuario() {
 		return usuario;
+	}
+
+	public LocalDateTime getCriadoEm() {
+		return criadoEm;
 	}
 
 }

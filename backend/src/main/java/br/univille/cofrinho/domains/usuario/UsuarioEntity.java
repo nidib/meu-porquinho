@@ -49,16 +49,16 @@ public class UsuarioEntity {
 		this.email = email;
 	}
 
+	public UsuarioEntity(UUID id) {
+		this.id = id;
+	}
+
 	public UUID getId() {
 		return this.id;
 	}
 
 	public String getLogin() {
 		return this.login;
-	}
-
-	public String getSenha() {
-		return this.senha;
 	}
 
 	public String getEmail() {
