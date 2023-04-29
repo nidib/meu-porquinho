@@ -1,6 +1,8 @@
 package br.univille.cofrinho.domains.autenticacao;
 
 import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
+import br.univille.cofrinho.domains.autenticacao.exceptions.AutenticacaoInvalidaException;
+import br.univille.cofrinho.domains.usuario.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,12 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 
 	private final CookieService cookieService;
 
+	private final UsuarioService usuarioService;
+
 	@Autowired
-	public AutenticacaoInterceptor(CookieService cookieService) {
+	public AutenticacaoInterceptor(CookieService cookieService, UsuarioService usuarioService) {
 		this.cookieService = cookieService;
+		this.usuarioService = usuarioService;
 	}
 
 	@Override
@@ -26,11 +31,15 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		UUID usuarioIdLogado = this.cookieService.obterUsuarioId(request);
+		UUID usuarioLogadoId = this.cookieService.obterUsuarioId(request);
+
+		if (!this.usuarioService.existePorId(usuarioLogadoId)) {
+			throw new AutenticacaoInvalidaException();
+		}
 
 		request.setAttribute(
 			UsuarioLogadoHandlerMethodArgumentResolver.usuarioLogadoIdChave,
-			usuarioIdLogado.toString()
+			usuarioLogadoId.toString()
 		);
 
 		return true;
