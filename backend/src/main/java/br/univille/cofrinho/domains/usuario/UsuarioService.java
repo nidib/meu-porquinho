@@ -47,4 +47,8 @@ public class UsuarioService {
 		this.usuarioRepository.deleteById(id);
 	}
 
+	public boolean existePorId(UUID id) {
+		return this.usuarioRepository.existsById(id);
+	}
+
 }
