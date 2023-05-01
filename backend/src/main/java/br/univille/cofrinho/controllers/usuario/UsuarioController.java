@@ -55,7 +55,7 @@ public class UsuarioController {
 
 	@PrecisaEstarLogado
 	@PostMapping("/perfil")
-	@Operation(description = "Edita perfil do usuário logado")
+	@Operation(description = "Edita o perfil do usuário logado")
 	public ResponseEntity<EditarPerfilResDTO> editarPerfil(@Valid @RequestBody EditarPerfilReqDTO perfil, @UsuarioLogadoId UUID usuarioLogadoId) {
 		PerfilEntity perfilEditado = this.perfilService.atualizar(
 			usuarioLogadoId,
