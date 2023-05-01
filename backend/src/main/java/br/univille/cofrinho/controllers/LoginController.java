@@ -31,7 +31,7 @@ public class LoginController {
 	}
 
 	@PostMapping
-	@Operation(description = "Fazer login, setando um cookie com a chave de autenticação")
+	@Operation(description = "Fazer login, setando um cookie de autenticação")
 	public ResponseEntity<Object> login(@Valid @RequestBody LoginReqDTO loginInfo, HttpServletResponse response) {
 		UsuarioEntity usuario = this.usuarioService.obterPorLoginESenha(loginInfo.login(), loginInfo.senha());
 		Cookie cookieDeAutenticacao = new Cookie("auth", tokenService.gerarToken(usuario));
