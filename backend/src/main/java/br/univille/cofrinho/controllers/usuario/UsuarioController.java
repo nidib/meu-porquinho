@@ -1,9 +1,6 @@
 package br.univille.cofrinho.controllers.usuario;
 
-import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilReqDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilResDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioReqDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioResDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.*;
 import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
@@ -17,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -68,6 +66,15 @@ public class UsuarioController {
 			new EditarPerfilResDTO(perfilEditado.getNomeCompleto(), perfilEditado.getDataDeNascimento(), perfilEditado.getApelido()),
 			HttpStatus.OK
 		);
+	}
+
+	@PrecisaEstarLogado
+	@GetMapping
+	@Operation(description = "Lista login e email do usuário logado")
+	public ResponseEntity<ListarUsuarioDTO> listaUsuario(@UsuarioLogadoId UUID id) {
+		 ListarUsuarioDTO lista = this.usuarioService.listarUsuario(id);
+
+		return new ResponseEntity<>(lista, HttpStatus.OK);
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.univille.cofrinho.domains.usuario;
 
+import br.univille.cofrinho.controllers.usuario.dtos.ListarUsuarioDTO;
 import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidos;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
 import br.univille.cofrinho.domains.perfil.PerfilService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -51,4 +53,13 @@ public class UsuarioService {
 		return this.usuarioRepository.existsById(id);
 	}
 
+	public ListarUsuarioDTO listarUsuario(UUID id) {
+		Optional<UsuarioEntity> usuario = this.usuarioRepository.findById(id);
+		ListarUsuarioDTO usuarioDTO = new ListarUsuarioDTO();
+		usuarioDTO.setEmail(usuario.get().getEmail());
+		usuarioDTO.setLogin(usuario.get().getLogin());
+
+		return usuarioDTO;
+	}
 }
+
