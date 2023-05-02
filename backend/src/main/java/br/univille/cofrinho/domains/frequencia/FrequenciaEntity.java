@@ -14,10 +14,10 @@ public class FrequenciaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	@Column(name="id")
+	@Column(name = "id")
 	private UUID id;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
 
 	@Column(name = "grandeza")
