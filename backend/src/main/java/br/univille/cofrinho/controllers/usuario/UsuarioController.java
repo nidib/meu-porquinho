@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -70,11 +69,11 @@ public class UsuarioController {
 
 	@PrecisaEstarLogado
 	@GetMapping
-	@Operation(description = "Lista login e email do usuário logado")
-	public ResponseEntity<ListarUsuarioDTO> listaUsuario(@UsuarioLogadoId UUID id) {
-		 ListarUsuarioDTO lista = this.usuarioService.listarUsuario(id);
+	@Operation(description = "Exibe informações do usuário logado")
+	public ResponseEntity<ObterUsuarioDTO> obterUsuario(@UsuarioLogadoId UUID id) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(id);
+		ObterUsuarioDTO usuarioDTO = new ObterUsuarioDTO(usuario.getEmail(), usuario.getLogin());
 
-		return new ResponseEntity<>(lista, HttpStatus.OK);
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 	}
-
 }

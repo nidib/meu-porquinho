@@ -1,6 +1,5 @@
 package br.univille.cofrinho.domains.usuario;
 
-import br.univille.cofrinho.controllers.usuario.dtos.ListarUsuarioDTO;
 import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidos;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
 import br.univille.cofrinho.domains.perfil.PerfilService;
@@ -53,13 +52,15 @@ public class UsuarioService {
 		return this.usuarioRepository.existsById(id);
 	}
 
-	public ListarUsuarioDTO listarUsuario(UUID id) {
+	public UsuarioEntity obterUsuario(UUID id) {
 		Optional<UsuarioEntity> usuario = this.usuarioRepository.findById(id);
-		ListarUsuarioDTO usuarioDTO = new ListarUsuarioDTO();
-		usuarioDTO.setEmail(usuario.get().getEmail());
-		usuarioDTO.setLogin(usuario.get().getLogin());
 
-		return usuarioDTO;
+		if (usuario.isEmpty()) {
+			throw new RegraDeNegocioException("Usuário não existe", HttpStatus.NOT_FOUND);
+		}
+
+		return usuario.get();
 	}
+
 }
 
