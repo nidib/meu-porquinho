@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -51,4 +52,15 @@ public class UsuarioService {
 		return this.usuarioRepository.existsById(id);
 	}
 
+	public UsuarioEntity obterUsuario(UUID id) {
+		Optional<UsuarioEntity> usuario = this.usuarioRepository.findById(id);
+
+		if (usuario.isEmpty()) {
+			throw new RegraDeNegocioException("Usuário não existe", HttpStatus.NOT_FOUND);
+		}
+
+		return usuario.get();
+	}
+
 }
+

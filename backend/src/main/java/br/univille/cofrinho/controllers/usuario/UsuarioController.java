@@ -1,9 +1,6 @@
 package br.univille.cofrinho.controllers.usuario;
 
-import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilReqDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.EditarPerfilResDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioReqDTO;
-import br.univille.cofrinho.controllers.usuario.dtos.CriarUsuarioResDTO;
+import br.univille.cofrinho.controllers.usuario.dtos.*;
 import br.univille.cofrinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.cofrinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
@@ -70,4 +67,13 @@ public class UsuarioController {
 		);
 	}
 
+	@PrecisaEstarLogado
+	@GetMapping
+	@Operation(description = "Exibe informações do usuário logado")
+	public ResponseEntity<ObterUsuarioDTO> obterUsuario(@UsuarioLogadoId UUID id) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(id);
+		ObterUsuarioDTO usuarioDTO = new ObterUsuarioDTO(usuario.getEmail(), usuario.getLogin());
+
+		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+	}
 }
