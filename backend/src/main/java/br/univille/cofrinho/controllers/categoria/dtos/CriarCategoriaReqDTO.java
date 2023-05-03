@@ -9,6 +9,5 @@ public record CriarCategoriaReqDTO(
 	@NotBlank(message = "titulo é obrigatório")
 	String titulo,
 	@NotNull(message = "tipo é obrigatório")
-	@NotBlank(message = "tipo é obrigatório")
 	TipoCategoriaEnum tipo
 ) {}

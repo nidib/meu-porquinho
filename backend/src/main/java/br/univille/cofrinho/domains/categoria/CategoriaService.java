@@ -18,21 +18,31 @@ public class CategoriaService {
 		this.categoriaRepository = categoriaRepository;
 	}
 
-	public CategoriaEntity obter(UUID id, UUID usuarioId) {
-		return this.categoriaRepository.findByIdAndUsuarioId(id, usuarioId)
+	private void verificaSeExiste(String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
+		if (this.categoriaRepository.existePor(titulo, tipo, usuarioId)) {
+			throw new RegraDeNegocioException("Essa categoria já existe", HttpStatus.CONFLICT);
+		}
+	}
+
+	private CategoriaEntity obter(UUID id, UUID usuarioId) {
+		return this.categoriaRepository.obterCategoriaPor(id, usuarioId)
 			.orElseThrow(() -> new RegraDeNegocioException("Categoria não encontrada", HttpStatus.NOT_FOUND));
 	}
 
-	public List<CategoriaEntity> obterCategorias(UUID usuarioId) {
-		return this.categoriaRepository.findAllByUsuarioIdIsNullOrUsuarioIdOrderByTipoAscTituloAsc(usuarioId);
+	public List<CategoriaEntity> obterDisponiveisPor(UUID usuarioId) {
+		return this.categoriaRepository.obterCategoriasDisponiveisPor(usuarioId);
 	}
 
-	public CategoriaEntity criarCategoria(String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
+	public CategoriaEntity criar(String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
+		verificaSeExiste(titulo, tipo, usuarioId);
+
 		return this.categoriaRepository.save(new CategoriaEntity(titulo, tipo, usuarioId));
 	}
 
-	public CategoriaEntity atualizarCategoria(UUID id, String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
+	public CategoriaEntity atualizar(UUID id, String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
 		CategoriaEntity categoriaExistente = this.obter(id, usuarioId);
+
+		verificaSeExiste(titulo, tipo, usuarioId);
 
 		return this.categoriaRepository.save(
 			new CategoriaEntity(categoriaExistente.getId(), titulo, tipo, usuarioId, categoriaExistente.getCriadoEm())
