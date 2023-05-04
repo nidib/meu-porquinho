@@ -36,7 +36,7 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public UsuarioEntity criarUsuario(String login, String email, String senha){
+	public UsuarioEntity criarUsuario(String login, String email, String senhaNaoCriptografada){
 		if (usuarioRepository.existsByLogin(login)) {
 			throw new RegraDeNegocioException("Login existente", HttpStatus.CONFLICT);
 		}
@@ -46,7 +46,7 @@ public class UsuarioService {
 		}
 
 		UsuarioEntity usuarioCriado = this.usuarioRepository.save(
-			new UsuarioEntity(login, CriptografiaService.criptografar(senha), email)
+			new UsuarioEntity(login, CriptografiaService.criptografar(senhaNaoCriptografada), email)
 		);
 
 		this.perfilService.criar(new PerfilEntity(usuarioCriado));
