@@ -65,4 +65,8 @@ public class UsuarioEntity {
 		return this.email;
 	}
 
+	public String getSenha() {
+		return this.senha;
+	}
+
 }
