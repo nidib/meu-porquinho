@@ -70,10 +70,11 @@ public class UsuarioController {
 	@PrecisaEstarLogado
 	@GetMapping
 	@Operation(description = "Exibe informações do usuário logado")
-	public ResponseEntity<ObterUsuarioDTO> obterUsuario(@UsuarioLogadoId UUID id) {
+	public ResponseEntity<ObterUsuarioResDTO> obterUsuario(@UsuarioLogadoId UUID id) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(id);
-		ObterUsuarioDTO usuarioDTO = new ObterUsuarioDTO(usuario.getEmail(), usuario.getLogin());
+		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(usuario.getEmail(), usuario.getLogin());
 
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 	}
+
 }
