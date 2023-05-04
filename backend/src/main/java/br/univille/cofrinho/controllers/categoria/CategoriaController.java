@@ -32,7 +32,7 @@ public class CategoriaController {
 	public ResponseEntity<List<CategoriaResDTO>> listarCategorias(@UsuarioLogadoId UUID usuarioLogadoId) {
 		List<CategoriaResDTO> categorias = this.categoriaService.obterDisponiveisPor(usuarioLogadoId)
 			.stream()
-			.map(categoria -> new CategoriaResDTO(categoria.getId(), categoria.getTitulo(), categoria.getTipo()))
+			.map(categoria -> new CategoriaResDTO(categoria.getId(), categoria.getNome(), categoria.getTipo()))
 			.toList();
 
 		return new ResponseEntity<>(categorias, HttpStatus.OK);
@@ -40,10 +40,10 @@ public class CategoriaController {
 
 	@PostMapping
 	public ResponseEntity<CategoriaResDTO> criarCategoria(@Valid @RequestBody CriarCategoriaReqDTO categoria, @UsuarioLogadoId UUID usuarioLogadoId) {
-		CategoriaEntity categoriaCriada = this.categoriaService.criar(categoria.titulo(), categoria.tipo(), usuarioLogadoId);
+		CategoriaEntity categoriaCriada = this.categoriaService.criar(categoria.nome(), categoria.tipo(), usuarioLogadoId);
 
 		return new ResponseEntity<>(
-			new CategoriaResDTO(categoriaCriada.getId(), categoriaCriada.getTitulo(), categoriaCriada.getTipo()),
+			new CategoriaResDTO(categoriaCriada.getId(), categoriaCriada.getNome(), categoriaCriada.getTipo()),
 			HttpStatus.CREATED
 		);
 	}
@@ -51,11 +51,11 @@ public class CategoriaController {
 	@PutMapping
 	public ResponseEntity<CategoriaResDTO> editarCategoria(@Valid @RequestBody EditarCategoriaReqDTO categoria, @UsuarioLogadoId UUID usuarioLogadoId) {
 		CategoriaEntity categoriaAtualizada = this.categoriaService.atualizar(
-			categoria.id(), categoria.titulo(), categoria.tipo(), usuarioLogadoId
+			categoria.id(), categoria.nome(), categoria.tipo(), usuarioLogadoId
 		);
 
 		return new ResponseEntity<>(
-			new CategoriaResDTO(categoriaAtualizada.getId(), categoriaAtualizada.getTitulo(), categoriaAtualizada.getTipo()),
+			new CategoriaResDTO(categoriaAtualizada.getId(), categoriaAtualizada.getNome(), categoriaAtualizada.getTipo()),
 			HttpStatus.OK
 		);
 	}

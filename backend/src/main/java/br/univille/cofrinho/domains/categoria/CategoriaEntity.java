@@ -17,8 +17,8 @@ public class CategoriaEntity {
 	@Column(name = "id")
 	private UUID id;
 
-	@Column(name = "titulo")
-	private String titulo;
+	@Column(name = "nome")
+	private String nome;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo")
@@ -40,16 +40,16 @@ public class CategoriaEntity {
 	public CategoriaEntity() {
 	}
 
-	public CategoriaEntity(UUID id, String titulo, TipoCategoriaEnum tipo, UUID usuarioLogadoId, LocalDateTime criadoEm) {
+	public CategoriaEntity(UUID id, String nome, TipoCategoriaEnum tipo, UUID usuarioLogadoId, LocalDateTime criadoEm) {
 		this.id = id;
-		this.titulo = titulo;
+		this.nome = nome;
 		this.tipo = tipo;
 		this.usuarioId = usuarioLogadoId;
 		this.criadoEm = criadoEm;
 	}
 
-	public CategoriaEntity(String titulo, TipoCategoriaEnum tipo, UUID usuarioId) {
-		this.titulo = titulo;
+	public CategoriaEntity(String nome, TipoCategoriaEnum tipo, UUID usuarioId) {
+		this.nome = nome;
 		this.tipo = tipo;
 		this.usuarioId = usuarioId;
 	}
@@ -58,8 +58,8 @@ public class CategoriaEntity {
 		return id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNome() {
+		return nome;
 	}
 
 	public TipoCategoriaEnum getTipo() {

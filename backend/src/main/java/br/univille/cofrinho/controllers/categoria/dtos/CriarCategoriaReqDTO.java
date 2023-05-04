@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CriarCategoriaReqDTO(
-	@NotNull(message = "titulo é obrigatório")
-	@NotBlank(message = "titulo é obrigatório")
-	String titulo,
+	@NotNull(message = "nome é obrigatório")
+	@NotBlank(message = "nome é obrigatório")
+	String nome,
 	@NotNull(message = "tipo é obrigatório")
 	TipoCategoriaEnum tipo
 ) {}

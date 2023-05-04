@@ -2,7 +2,7 @@ BEGIN;
 
 CREATE SCHEMA IF NOT EXISTS "main";
 
-CREATE TABLE IF NOT EXISTS "main"."frequencia" (
+CREATE TABLE "main"."frequencia" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"nome" CHARACTER VARYING(255) NOT NULL,
 	"grandeza" INTEGER NOT NULL UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS "main"."frequencia" (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE IF NOT EXISTS "main"."prioridade" (
+CREATE TABLE "main"."prioridade" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"nome" CHARACTER VARYING(255) NOT NULL,
 	"grandeza" INTEGER NOT NULL UNIQUE,
@@ -22,18 +22,18 @@ CREATE TABLE IF NOT EXISTS "main"."prioridade" (
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE IF NOT EXISTS "main"."usuario" (
+CREATE TABLE "main"."usuario" (
 	"id" UUID DEFAULT gen_random_uuid(),
-	"login" CHARACTER VARYING(50) NOT NULL,
+	"login" CHARACTER VARYING(50) UNIQUE NOT NULL,
+	"email" CHARACTER VARYING(255) UNIQUE NOT NULL,
 	"senha" CHARACTER VARYING(255) NOT NULL,
-	"email" CHARACTER VARYING(255) NOT NULL,
 	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	PRIMARY KEY ("id")
 );
 
-CREATE TABLE IF NOT EXISTS "main"."perfil" (
+CREATE TABLE "main"."perfil" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"nome_completo" CHARACTER VARYING(255),
 	"data_de_nascimento" DATE,
@@ -48,7 +48,22 @@ CREATE TABLE IF NOT EXISTS "main"."perfil" (
 	FOREIGN KEY ("usuario_id") REFERENCES "main"."usuario" ("id") ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS "main"."conta_bancaria" (
+CREATE TABLE "main"."categoria" (
+	"id" UUID DEFAULT gen_random_uuid(),
+	"nome" CHARACTER VARYING(255) NOT NULL,
+	"tipo" CHARACTER VARYING(50) NOT NULL,
+	"usuario_id" UUID,
+	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+ 	CONSTRAINT "nome_com_tipo_devem_ser_unicos_para_um_usuario" UNIQUE ("nome", "tipo", "usuario_id"),
+ 	CONSTRAINT "tipo_enum" CHECK ("tipo" IN ('GASTO', 'RECEITA')),
+
+	PRIMARY KEY ("id"),
+	FOREIGN KEY ("usuario_id") REFERENCES "main"."usuario" ("id") ON DELETE CASCADE
+);
+
+CREATE TABLE "main"."conta_bancaria" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"titulo" CHARACTER VARYING(255) NOT NULL,
 	"saldo" BIGINT NOT NULL DEFAULT 0,
@@ -57,24 +72,13 @@ CREATE TABLE IF NOT EXISTS "main"."conta_bancaria" (
 	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-	CONSTRAINT "dia_do_vencimento_da_fatura_deve_ser_um_dia_comum_para_todos_os_meses" CHECK ("dia_do_vencimento_da_fatura" BETWEEN 1 AND 28),
+	CONSTRAINT "vencimento_da_fatura_deve_ser_um_dia_comum_para_todos_os_meses" CHECK ("dia_do_vencimento_da_fatura" BETWEEN 1 AND 28),
 
 	PRIMARY KEY ("id"),
 	FOREIGN KEY ("usuario_id") REFERENCES "main"."usuario" ("id") ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS "main"."categoria" (
-	"id" UUID DEFAULT gen_random_uuid(),
-	"titulo" CHARACTER VARYING(255) NOT NULL,
-	"usuario_id" UUID NOT NULL,
-	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-	PRIMARY KEY ("id"),
-	FOREIGN KEY ("usuario_id") REFERENCES "main"."usuario" ("id") ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS "main"."movimentacao" (
+CREATE TABLE "main"."movimentacao" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"valor" BIGINT NOT NULL,
 	"data" DATE NOT NULL,
@@ -92,7 +96,7 @@ CREATE TABLE IF NOT EXISTS "main"."movimentacao" (
 	FOREIGN KEY ("frequencia_id") REFERENCES "main"."frequencia" ("id") ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS "main"."entrada" (
+CREATE TABLE "main"."receita" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"descricao" CHARACTER VARYING(255),
 	"categoria_id" UUID,
@@ -105,7 +109,7 @@ CREATE TABLE IF NOT EXISTS "main"."entrada" (
 	FOREIGN KEY ("categoria_id") REFERENCES "main"."categoria" ("id") ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS "main"."saida" (
+CREATE TABLE IF NOT EXISTS "main"."gasto" (
 	"id" UUID DEFAULT gen_random_uuid(),
 	"descricao" CHARACTER VARYING(255),
 	"categoria_id" UUID,

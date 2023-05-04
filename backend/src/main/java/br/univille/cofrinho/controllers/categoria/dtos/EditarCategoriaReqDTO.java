@@ -8,12 +8,10 @@ import java.util.UUID;
 
 public record EditarCategoriaReqDTO(
 	@NotNull(message = "id é obrigatório")
-	@NotBlank(message = "id é obrigatório")
 	UUID id,
-	@NotNull(message = "titulo é obrigatório")
-	@NotBlank(message = "titulo é obrigatório")
-	String titulo,
+	@NotNull(message = "nome é obrigatório")
+	@NotBlank(message = "nome é obrigatório")
+	String nome,
 	@NotNull(message = "tipo é obrigatório")
-	@NotBlank(message = "tipo é obrigatório")
 	TipoCategoriaEnum tipo
 ) {}

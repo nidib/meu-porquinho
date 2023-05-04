@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public record CategoriaResDTO(
 	UUID id,
-	String titulo,
+	String nome,
 	TipoCategoriaEnum tipo
 ) {}
