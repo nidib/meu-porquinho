@@ -1,6 +1,6 @@
 package br.univille.cofrinho.controllers.usuario.dtos;
 
-public record ObterUsuarioDTO(
+public record ObterUsuarioResDTO(
 	String login,
 	String email
 ) {}
