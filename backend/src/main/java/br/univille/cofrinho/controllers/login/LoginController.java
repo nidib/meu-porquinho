@@ -1,20 +1,16 @@
-package br.univille.cofrinho.controllers;
+package br.univille.cofrinho.controllers.login;
 
+import br.univille.cofrinho.controllers.login.dtos.LoginResDTO;
 import br.univille.cofrinho.domains.autenticacao.TokenService;
-import br.univille.cofrinho.domains.autenticacao.dtos.LoginReqDTO;
+import br.univille.cofrinho.controllers.login.dtos.LoginReqDTO;
 import br.univille.cofrinho.domains.usuario.UsuarioEntity;
 import br.univille.cofrinho.domains.usuario.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/login")
@@ -31,14 +27,12 @@ public class LoginController {
 	}
 
 	@PostMapping
-	@Operation(description = "Fazer login, setando um cookie de autenticação")
-	public ResponseEntity<Object> login(@Valid @RequestBody LoginReqDTO loginInfo, HttpServletResponse response) {
+	@Operation(description = "Realiza login, devolvendo o JWT")
+	public ResponseEntity<LoginResDTO> login(@Valid @RequestBody LoginReqDTO loginInfo) {
 		UsuarioEntity usuario = this.usuarioService.obterPorLoginESenha(loginInfo.login(), loginInfo.senha());
-		Cookie cookieDeAutenticacao = new Cookie("auth", tokenService.gerarToken(usuario));
+		String token = this.tokenService.gerarToken(usuario);
 
-		response.addCookie(cookieDeAutenticacao);
-
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(new LoginResDTO(token), HttpStatus.OK);
 	}
 
 }
