@@ -19,22 +19,36 @@ public class VariaveisDeAmbiente {
 
 	private final String jwtKey;
 
+	private String mode;
+
+	private String frontendOrigin;
+
 	public VariaveisDeAmbiente() {
 		this.dotenv = Dotenv
 			.configure()
 			.ignoreIfMissing()
 			.load();
 
-		this.bancoUrl = this.getVariavel("DB_URL");
-		this.bancoUser = this.getVariavel("DB_USER");
-		this.bancoSenha = this.getVariavel("DB_PASSWORD");
-		this.jwtKey = this.getVariavel("JWT_KEY");
+		this.mode = this.lerVariavelOpcional("MODE", "PRODUCTION");
+		this.bancoUrl = this.lerVariavelObrigatoria("DB_URL");
+		this.bancoUser = this.lerVariavelObrigatoria("DB_USER");
+		this.bancoSenha = this.lerVariavelObrigatoria("DB_PASSWORD");
+		this.jwtKey = this.lerVariavelObrigatoria("JWT_KEY");
+		this.frontendOrigin = this.isDevelopment() ? "*" : this.lerVariavelObrigatoria("FRONTEND_ORIGIN");
 	}
 
-	private String getVariavel(String variavel) {
+	private String lerVariavelOpcional(String variavel, String valorPadrao) {
+		return this.dotenv.get(variavel, valorPadrao);
+	}
+
+	private String lerVariavelObrigatoria(String variavel) {
 		return Optional
 			.ofNullable(this.dotenv.get(variavel))
 			.orElseThrow(() -> new VariavelDeAmbienteNaoConfiguradaException(variavel));
+	}
+
+	public boolean isDevelopment() {
+		return this.mode.equals("DEVELOPMENT");
 	}
 
 	public String getBancoUrl() {
@@ -51,6 +65,10 @@ public class VariaveisDeAmbiente {
 
 	public String getJwtKey() {
 		return this.jwtKey;
+	}
+
+	public String getFrontendOrigin() {
+		return this.frontendOrigin;
 	}
 
 }
