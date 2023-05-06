@@ -1,4 +1,4 @@
-package br.univille.cofrinho.domains.autenticacao.dtos;
+package br.univille.cofrinho.controllers.login.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -15,13 +15,13 @@ import java.util.*;
 @Component
 public class AutenticacaoInterceptor implements HandlerInterceptor {
 
-	private final CookieService cookieService;
+	private final TokenService tokenService;
 
 	private final UsuarioService usuarioService;
 
 	@Autowired
-	public AutenticacaoInterceptor(CookieService cookieService, UsuarioService usuarioService) {
-		this.cookieService = cookieService;
+	public AutenticacaoInterceptor(TokenService tokenService, UsuarioService usuarioService) {
+		this.tokenService = tokenService;
 		this.usuarioService = usuarioService;
 	}
 
@@ -31,7 +31,9 @@ public class AutenticacaoInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		UUID usuarioLogadoId = this.cookieService.obterUsuarioId(request);
+		UUID usuarioLogadoId = tokenService
+			.validarToken(request.getHeader("Authorization"))
+			.orElseThrow(AutenticacaoInvalidaException::new);
 
 		if (!this.usuarioService.existePorId(usuarioLogadoId)) {
 			throw new AutenticacaoInvalidaException();
