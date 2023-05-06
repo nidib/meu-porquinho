@@ -1,7 +1,7 @@
 package br.univille.cofrinho.controllers.login;
 
 import br.univille.cofrinho.controllers.login.dtos.LoginResDTO;
-import br.univille.cofrinho.domains.LoginService;
+import br.univille.cofrinho.domains.autenticacao.LoginService;
 import br.univille.cofrinho.controllers.login.dtos.LoginReqDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

@@ -1,6 +1,5 @@
-package br.univille.cofrinho.domains;
+package br.univille.cofrinho.domains.autenticacao;
 
-import br.univille.cofrinho.domains.autenticacao.TokenService;
 import br.univille.cofrinho.domains.usuario.UsuarioEntity;
 import br.univille.cofrinho.domains.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
