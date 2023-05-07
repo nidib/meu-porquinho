@@ -29,8 +29,7 @@ public class PerfilEntity {
 	@Column(name = "apelido")
 	private String apelido;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "perfil", fetch = FetchType.LAZY)
 	private UsuarioEntity usuario;
 
 	@CreationTimestamp
@@ -45,17 +44,12 @@ public class PerfilEntity {
 
 	public PerfilEntity() {}
 
-	public PerfilEntity(UUID id, String nomeCompleto, LocalDate dataDeNascimento, String apelido, LocalDateTime criadoEm, UsuarioEntity usuario) {
+	public PerfilEntity(UUID id, String nomeCompleto, LocalDate dataDeNascimento, String apelido, LocalDateTime criadoEm) {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.dataDeNascimento = dataDeNascimento;
 		this.apelido = apelido;
 		this.criadoEm = criadoEm;
-		this.usuario = usuario;
-	}
-
-	public PerfilEntity(UsuarioEntity usuario) {
-		this.usuario = usuario;
 	}
 
 	public UUID getId() {

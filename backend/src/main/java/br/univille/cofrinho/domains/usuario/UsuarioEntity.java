@@ -27,7 +27,8 @@ public class UsuarioEntity {
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "perfil_id")
 	private PerfilEntity perfil;
 
 	@CreationTimestamp
@@ -43,14 +44,11 @@ public class UsuarioEntity {
 	public UsuarioEntity() {
 	}
 
-	public UsuarioEntity(String login, String senha, String email) {
+	public UsuarioEntity(String login, String senha, String email, PerfilEntity perfil) {
 		this.login = login;
 		this.senha = senha;
 		this.email = email;
-	}
-
-	public UsuarioEntity(UUID id) {
-		this.id = id;
+		this.perfil = perfil;
 	}
 
 	public UUID getId() {
@@ -69,4 +67,7 @@ public class UsuarioEntity {
 		return this.senha;
 	}
 
+	public PerfilEntity getPerfil() {
+		return this.perfil;
+	}
 }

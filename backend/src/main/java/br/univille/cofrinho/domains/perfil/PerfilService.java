@@ -23,7 +23,6 @@ public class PerfilService {
 		return this.perfilRepository.save(perfil);
 	}
 
-
 	public PerfilEntity atualizar(UUID usuarioId, String nomeCompleto, LocalDate dataDeNascimento, String apelido) {
 		PerfilEntity perfilExistente = this.perfilRepository.findByUsuarioId(usuarioId)
 			.orElseThrow(() -> new RegraDeNegocioException("Perfil não encontrado", HttpStatus.NOT_FOUND));
@@ -34,10 +33,13 @@ public class PerfilService {
 				nomeCompleto,
 				dataDeNascimento,
 				apelido,
-				perfilExistente.getCriadoEm(),
-				new UsuarioEntity(usuarioId)
+				perfilExistente.getCriadoEm()
 			)
 		);
+	}
+
+	public void deletetarPorId(UUID id) {
+		this.perfilRepository.deleteById(id);
 	}
 
 }

@@ -45,17 +45,17 @@ public class UsuarioService {
 			throw new RegraDeNegocioException("Email existente", HttpStatus.CONFLICT);
 		}
 
-		UsuarioEntity usuarioCriado = this.usuarioRepository.save(
-			new UsuarioEntity(login, CriptografiaService.criptografar(senhaNaoCriptografada), email)
-		);
+		PerfilEntity perfilCriado = this.perfilService.criar(new PerfilEntity());
+		UsuarioEntity usuario = new UsuarioEntity(login, CriptografiaService.criptografar(senhaNaoCriptografada), email, perfilCriado);
 
-		this.perfilService.criar(new PerfilEntity(usuarioCriado));
-
-		return usuarioCriado;
+		return this.usuarioRepository.save(usuario);
 	}
 
 	public void deletarPorId (UUID id) {
+		UsuarioEntity usuario = this.obterUsuario(id);
+
 		this.usuarioRepository.deleteById(id);
+		this.perfilService.deletetarPorId(usuario.getPerfil().getId());
 	}
 
 	public boolean existePorId(UUID id) {

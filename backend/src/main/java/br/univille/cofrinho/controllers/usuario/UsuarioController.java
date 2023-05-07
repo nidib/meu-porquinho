@@ -72,7 +72,12 @@ public class UsuarioController {
 	@Operation(description = "Exibe informações do usuário logado")
 	public ResponseEntity<ObterUsuarioResDTO> obterUsuario(@UsuarioLogadoId UUID id) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(id);
-		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(usuario.getEmail(), usuario.getLogin());
+		PerfilEntity perfil = usuario.getPerfil();
+		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(
+			usuario.getEmail(),
+			usuario.getLogin(),
+			new ObterPerfilResDTO(perfil.getNomeCompleto(), perfil.getApelido(), perfil.getDataDeNascimento())
+		);
 
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 	}
