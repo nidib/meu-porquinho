@@ -62,7 +62,7 @@ public class UsuarioController {
 		);
 
 		return new ResponseEntity<>(
-			new EditarPerfilResDTO(perfilEditado.getNomeCompleto(), perfilEditado.getDataDeNascimento(), perfilEditado.getApelido()),
+			new EditarPerfilResDTO(perfilEditado.getNomeCompleto(), perfilEditado.getDataDeNascimento().toString(), perfilEditado.getApelido()),
 			HttpStatus.OK
 		);
 	}
@@ -72,7 +72,12 @@ public class UsuarioController {
 	@Operation(description = "Exibe informações do usuário logado")
 	public ResponseEntity<ObterUsuarioResDTO> obterUsuario(@UsuarioLogadoId UUID id) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(id);
-		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(usuario.getEmail(), usuario.getLogin());
+		PerfilEntity perfil = usuario.getPerfil();
+		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(
+			usuario.getEmail(),
+			usuario.getLogin(),
+			new ObterPerfilResDTO(perfil.getNomeCompleto(), perfil.getApelido(), perfil.getDataDeNascimento().toString())
+		);
 
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
 	}
