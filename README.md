@@ -40,22 +40,18 @@ Gerenciador financeiro
 ##### Backend
 - Esse projeto utiliza Java 17 com Gradle. Portanto, os mesmos deverão estar configurados em seu ambiente
 - Via linha de comando na raíz da pasta `backend` rodar:
-
 ```bash
 ./gradlew bootRun
 ```
-
 - Ambiente do backend deverá inicializar sem erros
 - Se nenhum erro for mostrado no terminal, testar a url `http://localhost:8080` que deverá retornar "ok"
 
 #### Rodar via docker
 - Por enquando, rodando via docker, definições variáveis de ambiente não são suportadas. Portanto manter o exato conteúdo de `.env-sample` no seu arquivo `.env`
 - Feito isso, via linha de comando na raíz do projeto rodar:
-
 ```bash
 docker-compose up
 ```
-
 - Esse comando irá:
 	- Levantar um banco postgres na porta 5433
 	- Levantar o backend na porta 8080
