@@ -70,4 +70,5 @@ public class UsuarioEntity {
 	public PerfilEntity getPerfil() {
 		return this.perfil;
 	}
+
 }
