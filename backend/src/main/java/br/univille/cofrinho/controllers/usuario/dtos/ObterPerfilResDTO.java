@@ -5,5 +5,5 @@ import java.time.LocalDate;
 public record ObterPerfilResDTO(
 	String nomeCompleto,
 	String apelido,
-	LocalDate dataDeNascimento
+	String dataDeNascimento
 ) {}
