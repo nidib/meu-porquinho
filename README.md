@@ -9,7 +9,6 @@ Gerenciador financeiro
 	- [Rodar via docker](#rodar-via-docker)
 
 
-
 ### Stack
 - Banco de dados: PostgreSQL
 - Backend: Java com Spring Boot | Gerenciado com Gradle
@@ -23,13 +22,16 @@ Gerenciador financeiro
 	- Esse arquivo contém informacões sensíveis e por isso nao será commitado
 	- Se for subir o ambiente com docker, ignorar o próximo passo, e deixar o conteúdo do arquivo duplicado igual ao sample
 	- Nele você deverá informar as variáveis do seu ambiente
+		1. MODE: Modo em que o backend irá inicializar ( `DEVELOPMENT` | `PRODUCTION` )
 		1. DB_URL: Url do seu banco postgres
 			- Deverá conter `postgresql://host:porta/nome_da_base` (Garantir que a base exista antes de subir a aplicação)
 		2. DB_USER: Username do seu banco
 		3. DB_PASSWORD: Senha do seu banco
+		4. JWT_KEY: Chave anônima usada para criar e verificar o token de autenticação.
 	- Com as variáveis de ambiente definidas, escolher:
 		- [Rodar direto](#rodar-direto)
 		- [Rodar via docker](#rodar-via-docker)
+
 
 #### Rodar direto
 
@@ -41,7 +43,6 @@ Gerenciador financeiro
 ```
 - Ambiente do backend deverá inicializar sem erros
 - Se nenhum erro for mostrado no terminal, testar a url `http://localhost:8080` que deverá retornar "ok"
-
 
 #### Rodar via docker
 - Por enquando, rodando via docker, definições variáveis de ambiente não são suportadas. Portanto manter o exato conteúdo de `.env-sample` no seu arquivo `.env`
