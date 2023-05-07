@@ -22,7 +22,7 @@ Gerenciador financeiro
 	- Esse arquivo contém informacões sensíveis e por isso nao será commitado
 	- Se for subir o ambiente com docker, ignorar o próximo passo, e deixar o conteúdo do arquivo duplicado igual ao sample
 	- Nele você deverá informar as variáveis do seu ambiente
-		1. MODE: Modo em que o backend ira inicializar ( `DEVELOPMENT` | `PRODUCTION` )
+		1. MODE: Modo em que o backend irá inicializar ( `DEVELOPMENT` | `PRODUCTION` )
 		1. DB_URL: Url do seu banco postgres
 			- Deverá conter `postgresql://host:porta/nome_da_base` (Garantir que a base exista antes de subir a aplicação)
 		2. DB_USER: Username do seu banco
