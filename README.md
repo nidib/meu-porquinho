@@ -1,22 +1,23 @@
 # Cofrinho
 
+
 Gerenciador financeiro
 
-## Sumário
 
+## Sumário
 - [Stack](#stack)
 - [Como rodar localmente?](#como-rodar-localmente)
 	- [Rodar direto](#rodar-direto)
 	- [Rodar via docker](#rodar-via-docker)
 
-### Stack
 
+### Stack
 - Banco de dados: PostgreSQL
 - Backend: Java com Spring Boot | Gerenciado com Gradle
 - Frontend: TBD
 
-### Como rodar localmente?
 
+### Como rodar localmente?
 - Clonar esse repositório
 - Configurar as variáveis de ambiente
 	- Na pasta `backend` duplicar o arquivo `.env-sample` e renomear para `.env`
@@ -33,10 +34,10 @@ Gerenciador financeiro
 		- [Rodar direto](#rodar-direto)
 		- [Rodar via docker](#rodar-via-docker)
 
+
 #### Rodar direto
 
 ##### Backend
-
 - Esse projeto utiliza Java 17 com Gradle. Portanto, os mesmos deverão estar configurados em seu ambiente
 - Via linha de comando na raíz da pasta `backend` rodar:
 
@@ -48,7 +49,6 @@ Gerenciador financeiro
 - Se nenhum erro for mostrado no terminal, testar a url `http://localhost:8080` que deverá retornar "ok"
 
 #### Rodar via docker
-
 - Por enquando, rodando via docker, definições variáveis de ambiente não são suportadas. Portanto manter o exato conteúdo de `.env-sample` no seu arquivo `.env`
 - Feito isso, via linha de comando na raíz do projeto rodar:
 
