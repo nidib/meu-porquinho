@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -50,9 +49,6 @@ public class UsuarioEntity {
 	public UsuarioEntity() {
 	}
 
-	public UsuarioEntity(UUID usuarioId) {
-	}
-
 	public UsuarioEntity(String login, String senha, String email, PerfilEntity perfil) {
 		this.login = login;
 		this.senha = senha;
@@ -78,10 +74,6 @@ public class UsuarioEntity {
 
 	public PerfilEntity getPerfil() {
 		return this.perfil;
-	}
-
-	public List<CategoriaEntity> getCategorias() {
-		return this.categorias;
 	}
 
 }
