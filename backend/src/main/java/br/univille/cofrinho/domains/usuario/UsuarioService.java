@@ -1,7 +1,7 @@
 package br.univille.cofrinho.domains.usuario;
 
 import br.univille.cofrinho.domains.autenticacao.CriptografiaService;
-import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidos;
+import br.univille.cofrinho.domains.autenticacao.exceptions.LoginOuSenhaInvalidosException;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
 import br.univille.cofrinho.domains.perfil.PerfilService;
 import br.univille.cofrinho.exceptions.RegraDeNegocioException;
@@ -27,10 +27,10 @@ public class UsuarioService {
 
 	public UsuarioEntity obterPorLoginESenha(String login, String senhaNaoCriptografada) {
 		UsuarioEntity usuario = this.usuarioRepository.findByLogin(login)
-			.orElseThrow(LoginOuSenhaInvalidos::new);
+			.orElseThrow(LoginOuSenhaInvalidosException::new);
 
 		if (!CriptografiaService.validar(senhaNaoCriptografada, usuario.getSenha())) {
-			throw new LoginOuSenhaInvalidos();
+			throw new LoginOuSenhaInvalidosException();
 		}
 
 		return usuario;

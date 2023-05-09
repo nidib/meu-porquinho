@@ -1,9 +1,11 @@
 package br.univille.cofrinho.controllers.error;
 
+import br.univille.cofrinho.config.VariaveisDeAmbiente;
 import br.univille.cofrinho.controllers.error.dtos.ErrorResDTO;
 import br.univille.cofrinho.exceptions.RegraDeNegocioException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,23 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ErrorController {
 
+	private final VariaveisDeAmbiente variaveisDeAmbiente;
+
+	@Autowired
+	public ErrorController(VariaveisDeAmbiente variaveisDeAmbiente) {
+		this.variaveisDeAmbiente = variaveisDeAmbiente;
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResDTO> excessaoNaoPega(Exception exception) {
-		Set<String> erros = Set.of("Algo deu errado");
-		System.out.println(exception.getMessage());
+		Set<String> erros;
+
+		if (this.variaveisDeAmbiente.isDevelopment()) {
+			erros = Set.of(exception.getClass().getName() + ": " + exception.getMessage());
+			System.out.println(exception.getMessage());
+		} else {
+			erros = Set.of("Algo deu errado");
+		}
 
 		return new ResponseEntity<>(
 			new ErrorResDTO(erros),
