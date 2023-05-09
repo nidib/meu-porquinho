@@ -1,5 +1,6 @@
 package br.univille.cofrinho.domains.categoria;
 
+import br.univille.cofrinho.domains.usuario.UsuarioEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,8 +25,9 @@ public class CategoriaEntity {
 	@Column(name = "tipo")
 	private TipoCategoriaEnum tipo;
 
-	@Column(name = "usuario_id")
-	private UUID usuarioId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usuario_id")
+	private UsuarioEntity usuario;
 
 	@CreationTimestamp
 	@Column(name = "criado_em")
@@ -40,18 +42,18 @@ public class CategoriaEntity {
 	public CategoriaEntity() {
 	}
 
-	public CategoriaEntity(UUID id, String nome, TipoCategoriaEnum tipo, UUID usuarioLogadoId, LocalDateTime criadoEm) {
+	public CategoriaEntity(UUID id, String nome, TipoCategoriaEnum tipo, UsuarioEntity usuario, LocalDateTime criadoEm) {
 		this.id = id;
 		this.nome = nome;
 		this.tipo = tipo;
-		this.usuarioId = usuarioLogadoId;
+		this.usuario = usuario;
 		this.criadoEm = criadoEm;
 	}
 
-	public CategoriaEntity(String nome, TipoCategoriaEnum tipo, UUID usuarioId) {
+	public CategoriaEntity(String nome, TipoCategoriaEnum tipo, UsuarioEntity usuario) {
 		this.nome = nome;
 		this.tipo = tipo;
-		this.usuarioId = usuarioId;
+		this.usuario = usuario;
 	}
 
 	public UUID getId() {

@@ -1,5 +1,6 @@
 package br.univille.cofrinho.domains.usuario;
 
+import br.univille.cofrinho.domains.categoria.CategoriaEntity;
 import br.univille.cofrinho.domains.perfil.PerfilEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -31,6 +34,9 @@ public class UsuarioEntity {
 	@JoinColumn(name = "perfil_id")
 	private PerfilEntity perfil;
 
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	private List<CategoriaEntity> categorias;
+
 	@CreationTimestamp
 	@Column(name = "criado_em")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -42,6 +48,9 @@ public class UsuarioEntity {
 	private LocalDateTime atualizadoEm;
 
 	public UsuarioEntity() {
+	}
+
+	public UsuarioEntity(UUID usuarioId) {
 	}
 
 	public UsuarioEntity(String login, String senha, String email, PerfilEntity perfil) {
@@ -69,6 +78,10 @@ public class UsuarioEntity {
 
 	public PerfilEntity getPerfil() {
 		return this.perfil;
+	}
+
+	public List<CategoriaEntity> getCategorias() {
+		return this.categorias;
 	}
 
 }
