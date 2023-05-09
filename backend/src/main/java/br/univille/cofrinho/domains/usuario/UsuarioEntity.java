@@ -83,4 +83,5 @@ public class UsuarioEntity {
 	public List<CategoriaEntity> getCategorias() {
 		return this.categorias;
 	}
+
 }
