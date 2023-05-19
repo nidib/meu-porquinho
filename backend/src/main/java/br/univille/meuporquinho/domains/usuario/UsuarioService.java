@@ -25,8 +25,8 @@ public class UsuarioService {
 		this.perfilService = perfilService;
 	}
 
-	public UsuarioEntity obterPorLoginESenha(String login, String senhaNaoCriptografada) {
-		UsuarioEntity usuario = this.usuarioRepository.findByLogin(login)
+	public UsuarioEntity obterPorLoginESenha(String loginOuEmail, String senhaNaoCriptografada) {
+		UsuarioEntity usuario = this.usuarioRepository.obterPorLoginOuEmail(loginOuEmail)
 			.orElseThrow(LoginOuSenhaInvalidosException::new);
 
 		if (!CriptografiaService.validar(senhaNaoCriptografada, usuario.getSenha())) {
