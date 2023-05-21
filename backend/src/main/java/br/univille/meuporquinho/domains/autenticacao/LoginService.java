@@ -18,8 +18,8 @@ public class LoginService {
 		this.tokenService = tokenService;
 	}
 
-	public String obterTokenDaSessao(String login, String senha) {
-		UsuarioEntity usuario = this.usuarioService.obterPorLoginESenha(login, senha);
+	public String obterTokenDaSessao(String loginOuEmail, String senha) {
+		UsuarioEntity usuario = this.usuarioService.obterPorLoginESenha(loginOuEmail, senha);
 
 		return this.tokenService.gerarToken(usuario);
 	}

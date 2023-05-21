@@ -24,7 +24,7 @@ public class LoginController {
 	@PostMapping
 	@Operation(description = "Realiza login, devolvendo o JWT")
 	public ResponseEntity<LoginResDTO> login(@Valid @RequestBody LoginReqDTO loginInfo) {
-		final String token = this.loginService.obterTokenDaSessao(loginInfo.login(), loginInfo.senha());
+		final String token = this.loginService.obterTokenDaSessao(loginInfo.loginOuEmail(), loginInfo.senha());
 
 		return new ResponseEntity<>(
 			new LoginResDTO(token),
