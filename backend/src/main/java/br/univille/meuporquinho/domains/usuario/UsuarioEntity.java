@@ -1,6 +1,7 @@
 package br.univille.meuporquinho.domains.usuario;
 
 import br.univille.meuporquinho.domains.categoria.CategoriaEntity;
+import br.univille.meuporquinho.domains.contabancaria.ContaBancariaEntity;
 import br.univille.meuporquinho.domains.perfil.PerfilEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,6 +36,9 @@ public class UsuarioEntity {
 
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private List<CategoriaEntity> categorias;
+
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	private List<ContaBancariaEntity> contasBancarias;
 
 	@CreationTimestamp
 	@Column(name = "criado_em")
