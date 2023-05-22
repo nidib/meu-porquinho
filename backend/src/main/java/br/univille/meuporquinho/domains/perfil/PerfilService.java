@@ -1,5 +1,7 @@
 package br.univille.meuporquinho.domains.perfil;
 
+import br.univille.meuporquinho.domains.autenticacao.CriptografiaService;
+import br.univille.meuporquinho.domains.usuario.UsuarioEntity;
 import br.univille.meuporquinho.exceptions.RegraDeNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,14 +13,16 @@ import java.util.UUID;
 @Service
 public class PerfilService {
 
-	private final PerfilRepository perfilRepository;
+	private PerfilRepository perfilRepository;
 
 	@Autowired
 	public PerfilService(PerfilRepository perfilRepository) {
 		this.perfilRepository = perfilRepository;
 	}
 
-	public PerfilEntity criar(PerfilEntity perfil) {
+	public PerfilEntity criar(String nomeCompleto, LocalDate dataDeNascimento) {
+
+		PerfilEntity perfil = new PerfilEntity(nomeCompleto, dataDeNascimento);
 		return this.perfilRepository.save(perfil);
 	}
 
@@ -40,5 +44,6 @@ public class PerfilService {
 	public void deletetarPorId(UUID id) {
 		this.perfilRepository.deleteById(id);
 	}
+
 
 }

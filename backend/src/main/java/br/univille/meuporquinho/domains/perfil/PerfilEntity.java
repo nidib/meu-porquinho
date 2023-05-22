@@ -52,6 +52,11 @@ public class PerfilEntity {
 		this.criadoEm = criadoEm;
 	}
 
+	public PerfilEntity(String nomeCompleto, LocalDate dataDeNascimento) {
+		this.nomeCompleto = nomeCompleto;
+		this.dataDeNascimento = dataDeNascimento;
+	}
+
 	public UUID getId() {
 		return id;
 	}
