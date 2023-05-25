@@ -33,7 +33,7 @@ public class UsuarioController {
 	@PostMapping
 	@Operation(description = "Cria um usuário")
 	public ResponseEntity<CriarUsuarioResDTO> criaUsuario(@Valid @RequestBody CriarUsuarioReqDTO usuarioInfo) {
-		UsuarioEntity usuarioNovo = this.usuarioService.criarUsuario(usuarioInfo.login(), usuarioInfo.email(), usuarioInfo.senha());
+		UsuarioEntity usuarioNovo = this.usuarioService.criarUsuario(usuarioInfo.login(), usuarioInfo.email(), usuarioInfo.senha(), usuarioInfo.nomeCompleto(), usuarioInfo.dataDeNascimento());
 
 		return new ResponseEntity<>(
 			new CriarUsuarioResDTO(usuarioNovo.getId(), usuarioNovo.getLogin(), usuarioNovo.getEmail()),

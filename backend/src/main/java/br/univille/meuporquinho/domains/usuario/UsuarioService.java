@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public UsuarioEntity criarUsuario(String login, String email, String senhaNaoCriptografada){
+	public UsuarioEntity criarUsuario(String login, String email, String senhaNaoCriptografada, String nomeCompleto, LocalDate dataDeNascimento){
 		if (usuarioRepository.existsByLogin(login)) {
 			throw new RegraDeNegocioException("Login existente", HttpStatus.CONFLICT);
 		}
@@ -45,7 +46,7 @@ public class UsuarioService {
 			throw new RegraDeNegocioException("Email existente", HttpStatus.CONFLICT);
 		}
 
-		PerfilEntity perfilCriado = this.perfilService.criar(new PerfilEntity());
+		PerfilEntity perfilCriado = this.perfilService.criar(new PerfilEntity(nomeCompleto, dataDeNascimento));
 		UsuarioEntity usuario = new UsuarioEntity(login, CriptografiaService.criptografar(senhaNaoCriptografada), email, perfilCriado);
 
 		return this.usuarioRepository.save(usuario);
