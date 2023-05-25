@@ -40,4 +40,5 @@ public class PerfilService {
 	public void deletetarPorId(UUID id) {
 		this.perfilRepository.deleteById(id);
 	}
+
 }

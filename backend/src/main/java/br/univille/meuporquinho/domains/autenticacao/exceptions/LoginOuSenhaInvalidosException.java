@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 public class LoginOuSenhaInvalidosException extends RegraDeNegocioException {
 
 	public LoginOuSenhaInvalidosException() {
-		super("Login ou senha inválidos", HttpStatus.UNAUTHORIZED);
+		super("Login, email ou senha inválidos", HttpStatus.UNAUTHORIZED);
 	}
 
 }
