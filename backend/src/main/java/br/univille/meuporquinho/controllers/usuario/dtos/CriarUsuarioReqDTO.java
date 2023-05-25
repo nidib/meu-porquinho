@@ -15,11 +15,6 @@ public record CriarUsuarioReqDTO(
 	@NotNull(message = "senha é obrigatória")
 	@NotBlank(message = "senha é obrigatória")
 	String senha,
-	@NotNull(message = "nome não é obrigatório")
-	@NotBlank(message = "nome não é obrigatório")
 	String nomeCompleto,
-	@NotNull(message = "dataDeNascimento não é obrigatório")
 	LocalDate dataDeNascimento
-
-) {
-}
+) {}

@@ -42,8 +42,6 @@ public class PerfilEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime atualizadoEm;
 
-	public PerfilEntity() {}
-
 	public PerfilEntity(UUID id, String nomeCompleto, LocalDate dataDeNascimento, String apelido, LocalDateTime criadoEm) {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
