@@ -10,10 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -40,6 +37,13 @@ public class ContaBancariaController {
 			new CriarContaBancariaResDTO(contaBancariaCriada.getId(), contaBancariaCriada.getTitulo(), saldoEmReaisDecimal, contaBancariaCriada.getDiaDoVencimentoDaFatura()),
 			HttpStatus.CREATED
 		);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deletarContaBancaria(@PathVariable("id") UUID id, @UsuarioLogadoId UUID usuarioLogadoId) {
+		this.contaBancariaService.remover(id, usuarioLogadoId);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }
