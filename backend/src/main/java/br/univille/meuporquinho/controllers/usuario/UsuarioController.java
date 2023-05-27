@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -76,7 +78,11 @@ public class UsuarioController {
 		ObterUsuarioResDTO usuarioDTO = new ObterUsuarioResDTO(
 			usuario.getEmail(),
 			usuario.getLogin(),
-			new ObterPerfilResDTO(perfil.getNomeCompleto(), perfil.getApelido(), perfil.getDataDeNascimento().toString())
+			new ObterPerfilResDTO(
+				perfil.getNomeCompleto(),
+				perfil.getApelido(),
+				Optional.ofNullable(perfil.getDataDeNascimento()).map(Objects::toString).orElse(null)
+			)
 		);
 
 		return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
