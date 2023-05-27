@@ -1,6 +1,5 @@
 package br.univille.meuporquinho.domains.contabancaria;
 
-import br.univille.meuporquinho.domains.categoria.CategoriaEntity;
 import br.univille.meuporquinho.domains.usuario.UsuarioEntity;
 import br.univille.meuporquinho.domains.usuario.UsuarioService;
 import br.univille.meuporquinho.exceptions.RegraDeNegocioException;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +27,12 @@ public class ContaBancariaService {
 	private ContaBancariaEntity obter(UUID id, UsuarioEntity usuario) {
 		return this.contaBancariaRepository.obterPorIdEUsuario(id, usuario)
 			.orElseThrow(() -> new RegraDeNegocioException("Conta bancária não encontrada", HttpStatus.NOT_FOUND));
+	}
+
+	public List<ContaBancariaEntity> obterDisponiveisPor(UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+
+		return this.contaBancariaRepository.obterTodasPorUsuario(usuario);
 	}
 
 	public ContaBancariaEntity criar(String titulo, double saldo, int diaDoVencimentoDaFatura, UUID usuarioId) {
