@@ -41,4 +41,29 @@ public class ContaBancariaEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime atualizadoEm;
 
+	public ContaBancariaEntity() {}
+
+	public ContaBancariaEntity(String titulo, Long saldo, int diaDoVencimentoDaFatura, UsuarioEntity usuario) {
+		this.titulo = titulo;
+		this.saldo = saldo;
+		this.diaDoVencimentoDaFatura = diaDoVencimentoDaFatura;
+		this.usuario = usuario;
+	}
+
+	public UUID getId() {
+		return this.id;
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public Long getSaldo() {
+		return this.saldo;
+	}
+
+	public int getDiaDoVencimentoDaFatura() {
+		return this.diaDoVencimentoDaFatura;
+	}
+
 }
