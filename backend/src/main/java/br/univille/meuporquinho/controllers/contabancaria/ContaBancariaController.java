@@ -2,6 +2,7 @@ package br.univille.meuporquinho.controllers.contabancaria;
 
 import br.univille.meuporquinho.controllers.contabancaria.dtos.CriarContaBancariaReqDTO;
 import br.univille.meuporquinho.controllers.contabancaria.dtos.ContaBancariaResDTO;
+import br.univille.meuporquinho.controllers.contabancaria.dtos.EditarContaBancariaReqDTO;
 import br.univille.meuporquinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.meuporquinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import br.univille.meuporquinho.domains.contabancaria.ContaBancariaEntity;
@@ -43,12 +44,31 @@ public class ContaBancariaController {
 		ContaBancariaEntity contaBancariaCriada = this.contaBancariaService.criar(
 			contaBancaria.titulo(), contaBancaria.saldo(), contaBancaria.diaDoVencimentoDaFatura(), usuarioLogadoId
 		);
-		double saldoEmReaisDecimal = contaBancariaCriada.getSaldo() / 100.0;
+		double saldoEmReaisDecimal = this.contaBancariaService.obterSaldoEmReaisDecimal(contaBancariaCriada.getSaldo());
 
 		return new ResponseEntity<>(
 			new ContaBancariaResDTO(contaBancariaCriada.getId(), contaBancariaCriada.getTitulo(), saldoEmReaisDecimal, contaBancariaCriada.getDiaDoVencimentoDaFatura()),
 			HttpStatus.CREATED
 		);
+	}
+
+	@PutMapping
+	public ResponseEntity<ContaBancariaResDTO> editarContaBancaria(@Valid @RequestBody EditarContaBancariaReqDTO contaBancaria, @UsuarioLogadoId UUID usuarioLogadoId) {
+		ContaBancariaEntity contaBancariaAtualizada = this.contaBancariaService.atualizar(
+			contaBancaria.id(),
+			contaBancaria.titulo(),
+			contaBancaria.saldo(),
+			contaBancaria.diaDoVencimentoDaFatura(),
+			usuarioLogadoId
+		);
+		ContaBancariaResDTO dto = new ContaBancariaResDTO(
+			contaBancariaAtualizada.getId(),
+			contaBancariaAtualizada.getTitulo(),
+			this.contaBancariaService.obterSaldoEmReaisDecimal(contaBancariaAtualizada.getSaldo()),
+			contaBancariaAtualizada.getDiaDoVencimentoDaFatura()
+		);
+
+		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

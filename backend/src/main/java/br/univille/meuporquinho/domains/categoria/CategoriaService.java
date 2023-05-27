@@ -43,7 +43,7 @@ public class CategoriaService {
 	public CategoriaEntity criar(String nome, TipoCategoriaEnum tipo, UUID usuarioId) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
 
-		verificaSeExiste(nome, tipo, usuario);
+		this.verificaSeExiste(nome, tipo, usuario);
 
 		return this.categoriaRepository.save(new CategoriaEntity(nome, tipo, usuario));
 	}
@@ -52,7 +52,7 @@ public class CategoriaService {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
 		CategoriaEntity categoriaExistente = this.obter(id, usuario);
 
-		verificaSeExiste(nome, tipo, usuario);
+		this.verificaSeExiste(nome, tipo, usuario);
 
 		CategoriaEntity categoriaAtualizada = new CategoriaEntity(categoriaExistente.getId(), nome, tipo, usuario, categoriaExistente.getCriadoEm());
 
