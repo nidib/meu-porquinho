@@ -22,7 +22,7 @@ public class ContaBancariaEntity {
 	private String titulo;
 
 	@Column(name = "saldo")
-	private Long saldo;
+	private long saldo;
 
 	@Column(name = "dia_do_vencimento_da_fatura")
 	private int diaDoVencimentoDaFatura;
@@ -43,7 +43,7 @@ public class ContaBancariaEntity {
 
 	public ContaBancariaEntity() {}
 
-	public ContaBancariaEntity(String titulo, Long saldo, int diaDoVencimentoDaFatura, UsuarioEntity usuario) {
+	public ContaBancariaEntity(String titulo, long saldo, int diaDoVencimentoDaFatura, UsuarioEntity usuario) {
 		this.titulo = titulo;
 		this.saldo = saldo;
 		this.diaDoVencimentoDaFatura = diaDoVencimentoDaFatura;
@@ -58,7 +58,7 @@ public class ContaBancariaEntity {
 		return this.titulo;
 	}
 
-	public Long getSaldo() {
+	public long getSaldo() {
 		return this.saldo;
 	}
 
