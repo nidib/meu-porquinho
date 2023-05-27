@@ -73,6 +73,7 @@ CREATE TABLE "main"."conta_bancaria" (
 	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	CONSTRAINT "vencimento_da_fatura_deve_ser_um_dia_comum_para_todos_os_meses" CHECK ("dia_do_vencimento_da_fatura" BETWEEN 1 AND 28),
+	CONSTRAINT "titulo_da_conta_deve_ser_unica_para_um_usuario" UNIQUE ("titulo", "usuario_id"),
 
 	PRIMARY KEY ("id"),
 	FOREIGN KEY ("usuario_id") REFERENCES "main"."usuario" ("id") ON DELETE CASCADE

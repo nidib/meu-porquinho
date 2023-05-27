@@ -22,7 +22,7 @@ public class ContaBancariaEntity {
 	private String titulo;
 
 	@Column(name = "saldo")
-	private Long saldo;
+	private long saldo;
 
 	@Column(name = "dia_do_vencimento_da_fatura")
 	private int diaDoVencimentoDaFatura;
@@ -40,5 +40,30 @@ public class ContaBancariaEntity {
 	@Column(name = "atualizado_em")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime atualizadoEm;
+
+	public ContaBancariaEntity() {}
+
+	public ContaBancariaEntity(String titulo, long saldo, int diaDoVencimentoDaFatura, UsuarioEntity usuario) {
+		this.titulo = titulo;
+		this.saldo = saldo;
+		this.diaDoVencimentoDaFatura = diaDoVencimentoDaFatura;
+		this.usuario = usuario;
+	}
+
+	public UUID getId() {
+		return this.id;
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public long getSaldo() {
+		return this.saldo;
+	}
+
+	public int getDiaDoVencimentoDaFatura() {
+		return this.diaDoVencimentoDaFatura;
+	}
 
 }
