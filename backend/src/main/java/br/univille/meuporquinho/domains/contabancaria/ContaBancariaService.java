@@ -1,5 +1,6 @@
 package br.univille.meuporquinho.domains.contabancaria;
 
+import br.univille.meuporquinho.domains.categoria.CategoriaEntity;
 import br.univille.meuporquinho.domains.usuario.UsuarioEntity;
 import br.univille.meuporquinho.domains.usuario.UsuarioService;
 import br.univille.meuporquinho.exceptions.RegraDeNegocioException;
@@ -23,6 +24,11 @@ public class ContaBancariaService {
 		this.usuarioService = usuarioService;
 	}
 
+	private ContaBancariaEntity obter(UUID id, UsuarioEntity usuario) {
+		return this.contaBancariaRepository.obterPorIdEUsuario(id, usuario)
+			.orElseThrow(() -> new RegraDeNegocioException("Conta bancária não encontrada", HttpStatus.NOT_FOUND));
+	}
+
 	public ContaBancariaEntity criar(String titulo, double saldo, int diaDoVencimentoDaFatura, UUID usuarioId) {
 		if (diaDoVencimentoDaFatura < 1 || diaDoVencimentoDaFatura > 28) {
 			throw new RegraDeNegocioException("Dia do vencimento da fatura deve ser entre 1 e 28", HttpStatus.BAD_REQUEST);
@@ -39,6 +45,13 @@ public class ContaBancariaService {
 		return this.contaBancariaRepository.save(
 			new ContaBancariaEntity(titulo, saldoEmCentavos, diaDoVencimentoDaFatura, usuario)
 		);
+	}
+
+	public void remover(UUID id, UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+		ContaBancariaEntity contaBancaria = this.obter(id, usuario);
+
+		this.contaBancariaRepository.deleteById(contaBancaria.getId());
 	}
 
 }
