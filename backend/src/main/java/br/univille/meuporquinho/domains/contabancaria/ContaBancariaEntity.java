@@ -50,6 +50,15 @@ public class ContaBancariaEntity {
 		this.usuario = usuario;
 	}
 
+	public ContaBancariaEntity(UUID id, String titulo, long saldo, int diaDoVencimentoDaFatura, UsuarioEntity usuario, LocalDateTime criadoEm) {
+		this.id = id;
+		this.titulo = titulo;
+		this.saldo = saldo;
+		this.diaDoVencimentoDaFatura = diaDoVencimentoDaFatura;
+		this.usuario = usuario;
+		this.criadoEm = criadoEm;
+	}
+
 	public UUID getId() {
 		return this.id;
 	}
@@ -64,6 +73,10 @@ public class ContaBancariaEntity {
 
 	public int getDiaDoVencimentoDaFatura() {
 		return this.diaDoVencimentoDaFatura;
+	}
+
+	public LocalDateTime getCriadoEm() {
+		return this.criadoEm;
 	}
 
 }

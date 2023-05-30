@@ -29,6 +29,26 @@ public class ContaBancariaService {
 			.orElseThrow(() -> new RegraDeNegocioException("Conta bancária não encontrada", HttpStatus.NOT_FOUND));
 	}
 
+	private void verificaSeExiste(String titulo, UsuarioEntity usuario) {
+		if (this.contaBancariaRepository.existePor(titulo, usuario)) {
+			throw new RegraDeNegocioException("Conta bancária com esse nome já existe", HttpStatus.CONFLICT);
+		}
+	}
+
+	private void validarVencimentoDaFatura(int diaDoVencimentoDaFatura) {
+		if (diaDoVencimentoDaFatura < 1 || diaDoVencimentoDaFatura > 28) {
+			throw new RegraDeNegocioException("Dia do vencimento da fatura deve ser entre 1 e 28", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	private long obterSaldoEmCentavos(double saldo) {
+		return (long) (saldo * 100);
+	}
+
+	public double obterSaldoEmReaisDecimal(long saldo) {
+		return saldo / 100.0;
+	}
+
 	public List<ContaBancariaEntity> obterDisponiveisPor(UUID usuarioId) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
 
@@ -36,21 +56,35 @@ public class ContaBancariaService {
 	}
 
 	public ContaBancariaEntity criar(String titulo, double saldo, int diaDoVencimentoDaFatura, UUID usuarioId) {
-		if (diaDoVencimentoDaFatura < 1 || diaDoVencimentoDaFatura > 28) {
-			throw new RegraDeNegocioException("Dia do vencimento da fatura deve ser entre 1 e 28", HttpStatus.BAD_REQUEST);
-		}
+		this.validarVencimentoDaFatura(diaDoVencimentoDaFatura);
 
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
-		Optional<ContaBancariaEntity> contaBancariaExistente = this.contaBancariaRepository.obterPorTituloEUsuario(titulo, usuario);
-		long saldoEmCentavos = (long) (saldo * 100);
+		long saldoEmCentavos = this.obterSaldoEmCentavos(saldo);
 
-		if (contaBancariaExistente.isPresent()) {
-			throw new RegraDeNegocioException("Conta bancária com esse nome já existe", HttpStatus.CONFLICT);
-		}
+		this.verificaSeExiste(titulo, usuario);
 
 		return this.contaBancariaRepository.save(
 			new ContaBancariaEntity(titulo, saldoEmCentavos, diaDoVencimentoDaFatura, usuario)
 		);
+	}
+
+	public ContaBancariaEntity atualizar(UUID id, String titulo, double saldo, int diaDoVencimentoDaFatura, UUID usuarioLogadoId) {
+		this.validarVencimentoDaFatura(diaDoVencimentoDaFatura);
+
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioLogadoId);
+		ContaBancariaEntity contaBancariaExistente = this.obter(id, usuario);
+		long saldoEmCentavos = this.obterSaldoEmCentavos(saldo);
+		boolean estaTentandoAlterarOTitulo = !contaBancariaExistente.getTitulo().equals(titulo);
+
+		if (estaTentandoAlterarOTitulo) {
+			this.verificaSeExiste(titulo, usuario);
+		}
+
+		ContaBancariaEntity contaBancariaAtualizada = new ContaBancariaEntity(
+			contaBancariaExistente.getId(), titulo, saldoEmCentavos, diaDoVencimentoDaFatura, usuario, contaBancariaExistente.getCriadoEm()
+		);
+
+		return this.contaBancariaRepository.save(contaBancariaAtualizada);
 	}
 
 	public void remover(UUID id, UUID usuarioId) {
