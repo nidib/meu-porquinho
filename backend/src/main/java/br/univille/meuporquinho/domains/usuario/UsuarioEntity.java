@@ -3,6 +3,7 @@ package br.univille.meuporquinho.domains.usuario;
 import br.univille.meuporquinho.domains.categoria.CategoriaEntity;
 import br.univille.meuporquinho.domains.contabancaria.ContaBancariaEntity;
 import br.univille.meuporquinho.domains.perfil.PerfilEntity;
+import br.univille.meuporquinho.utils.SanitizacaoDeTextoUtils;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -54,9 +55,9 @@ public class UsuarioEntity {
 	}
 
 	public UsuarioEntity(String login, String senha, String email, PerfilEntity perfil) {
-		this.login = login;
+		this.login = SanitizacaoDeTextoUtils.lowerCaseERemoveEspacos(login);
 		this.senha = senha;
-		this.email = email;
+		this.email = SanitizacaoDeTextoUtils.lowerCaseERemoveEspacos(email);
 		this.perfil = perfil;
 	}
 
