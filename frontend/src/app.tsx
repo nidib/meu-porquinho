@@ -1,10 +1,9 @@
-import { Fragment } from 'react';
-import { LogoHeading } from 'src/components/logo-heading';
+import { Router } from 'src/pages/router';
 
 export function App() {
 	return (
-		<Fragment>
-			<LogoHeading />
-		</Fragment>
+		<>
+			<Router />
+		</>
 	);
 }
