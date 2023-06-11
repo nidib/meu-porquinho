@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 
 import { App } from 'src/app';
 
-
 function main() {
 	const root = document.getElementById('root');
 
@@ -11,13 +10,11 @@ function main() {
 		throw new Error('Elemento com id #root não encontrado');
 	}
 
-	ReactDOM
-		.createRoot(root)
-		.render(
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
-		);
+	ReactDOM.createRoot(root).render(
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>
+	);
 }
 
 main();
