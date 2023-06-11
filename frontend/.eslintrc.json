@@ -6,48 +6,36 @@
 	},
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
+		"project": true,
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"plugin:react/recommended",
-		"plugin:react-hooks/recommended"
+		"plugin:react-hooks/recommended",
+		"prettier"
 	],
-	"plugins": [
-		"react-refresh"
-	],
+	"plugins": ["react-refresh", "react", "react-hooks"],
 	"settings": {
 		"react": {
-			"version": "18.2.0"
+			"version": "detect"
 		}
 	},
 	"rules": {
-		"indent": ["error", "tab", { "SwitchCase": 1 }],
-		"no-tabs": ["error", { "allowIndentationTabs": true }],
-		"quotes": ["error", "single"],
-		"semi": "error",
-		"max-len": ["error", { "code": 150, "tabWidth": 4 }],
-		"eol-last": ["error", "always"],
-		"arrow-parens": ["error", "as-needed"],
-		"linebreak-style": ["error", "unix"],
-		"object-curly-spacing": ["error", "always"],
-		"@typescript-eslint/no-unused-vars": ["error", {
-			"argsIgnorePattern": "^_"
-		}],
+		"react-refresh/only-export-components": "warn",
+		"react/jsx-uses-react": "off",
 		"react/react-in-jsx-scope": "off",
-		"react/jsx-indent": [2, "tab"],
-		"react/jsx-fragments": ["error", "element"],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-		"react/jsx-curly-spacing": ["error", {
-			"when": "never",
-			"children": { "when": "always" }
-		}],
-		"react/jsx-curly-brace-presence": ["error", {
-			"props": "always",
-			"children": "always"
-		}],
-		"react-refresh/only-export-components": "warn"
+		"@typescript-eslint/no-misused-promises": [
+			"error",
+			{
+				"checksVoidReturn": {
+					"arguments": false,
+					"attributes": false
+				}
+			}
+		]
 	}
 }
