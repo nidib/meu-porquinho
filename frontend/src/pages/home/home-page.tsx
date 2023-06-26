@@ -20,7 +20,7 @@ export function HomePage() {
 
 	return (
 		<main
-			className={clsx(
+			className={clsx([
 				'flex',
 				'h-screen',
 				'w-screen',
@@ -33,15 +33,16 @@ export function HomePage() {
 				'bg-ceu-noite-100',
 				'px-12',
 				'md:px-8',
-				'overflow-hidden'
-			)}
+				'overflow-hidden',
+				'bg-stars',
+				'bg-center',
+				'bg-cover',
+				'bg-repeat-y',
+			])}
 		>
 			<div className="flex flex-col items-center gap-1 md:flex-col-reverse md:gap-12 lg:flex-row-reverse lg:items-start">
-				<div className="relative">
-					<div className="md:rotate-[30deg]">
-						<Logo />
-					</div>
-					<img src={trail} className="absolute right-[120px] top-[300px] hidden md:block" />
+				<div className="md:rotate-[30deg]">
+					<Logo />
 				</div>
 				<div className="flex flex-col gap-16">
 					<div>
@@ -77,6 +78,7 @@ export function HomePage() {
 							{isLoading ? <CircleNotch weight="bold" className="animate-spin text-2xl" /> : 'Entrar'}
 						</div>
 					</Button>
+					<Button>Criar conta</Button>
 					<Button intent={'ghost'}>Esqueci a senha</Button>
 				</div>
 			</form>

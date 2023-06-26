@@ -2,22 +2,12 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { ReactNode } from 'react';
 
 const button = cva(
-	[
-		'flex',
-		'justify-center',
-		'items-center',
-		'rounded-2xl',
-		'py-4',
-		'px-8',
-		'border-2',
-		'text-lg',
-		'transition-colors',
-	],
+	['flex', 'justify-center', 'items-center', 'rounded-2xl', 'px-8', 'border-2', 'text-lg', 'transition-colors'],
 	{
 		variants: {
 			intent: {
-				primary: ['bg-rosa-porquinho-100', 'text-ceu-noite-200', 'border-transparent'],
-				default: ['border-rosa-porquinho-100', 'text-rosa-porquinho-100'],
+				primary: ['bg-rosa-porquinho-100', 'text-ceu-noite-200', 'border-transparent', 'py-4'],
+				default: ['border-rosa-porquinho-100', 'text-rosa-porquinho-100', 'py-4'],
 				ghost: ['border-none', 'text-gray-300', 'underline', 'py-1', 'hover:text-gray-50'],
 			},
 			disabled: {

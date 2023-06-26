@@ -13,7 +13,7 @@ export function Logo() {
 	return (
 		<img
 			src={porquinho}
-			className="h-[330px]"
+			className="h-[286px]"
 			alt="Logo do site. Um porquinho com traje de astronauta e uma moeda dourada"
 		/>
 	);

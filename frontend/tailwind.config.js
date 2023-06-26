@@ -9,6 +9,9 @@ export default {
 				'ceu-noite-100': '#121F25',
 				'ceu-noite-200': '#051219',
 			},
+			backgroundImage: {
+				stars: "url('/public/stars.png')",
+			},
 		},
 	},
 	plugins: [],
