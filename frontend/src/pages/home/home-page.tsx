@@ -5,7 +5,6 @@ import { CircleNotch, LockSimple, User } from '@phosphor-icons/react';
 import { Button } from 'src/components/button';
 import { Input } from 'src/components/input';
 import { Logo, LogoHeading } from 'src/components/logo';
-import trail from '../../assets/trail.png';
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
