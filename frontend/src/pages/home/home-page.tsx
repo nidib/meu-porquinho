@@ -7,7 +7,7 @@ import { Button } from 'src/components/button';
 import { Input } from 'src/components/input';
 import { Logo, LogoHeading } from 'src/components/logo';
 
-const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
+export const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export function HomePage() {
 	const [isLoading, setIsLoading] = useState(false);
