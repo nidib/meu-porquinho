@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CircleNotch, LockSimple, User } from '@phosphor-icons/react';
 
 import { Button } from 'src/components/button';
@@ -51,12 +52,12 @@ export function HomePage() {
 					<p className="hidden font-thin text-gray-50 lg:block">
 						Se você ainda não tem uma conta,
 						<br /> registre-se{' '}
-						<a
-							href="#"
+						<Link
+							to={'/criar-conta'}
 							className="font-normal text-rosa-porquinho-100 underline hover:text-rosa-porquinho-200"
 						>
 							aqui!
-						</a>
+						</Link>
 					</p>
 				</div>
 			</div>
@@ -77,7 +78,9 @@ export function HomePage() {
 							{isLoading ? <CircleNotch weight="bold" className="animate-spin text-2xl" /> : 'Entrar'}
 						</div>
 					</Button>
-					<Button>Criar conta</Button>
+					<Link to={'/criar-conta'}>
+						<Button>Criar conta</Button>
+					</Link>
 					<Button intent={'ghost'}>Esqueci a senha</Button>
 				</div>
 			</form>

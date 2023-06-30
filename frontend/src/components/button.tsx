@@ -2,7 +2,17 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { ReactNode } from 'react';
 
 const button = cva(
-	['flex', 'justify-center', 'items-center', 'rounded-2xl', 'px-8', 'border-2', 'text-lg', 'transition-colors'],
+	[
+		'flex',
+		'justify-center',
+		'items-center',
+		'rounded-2xl',
+		'px-8',
+		'border-2',
+		'text-lg',
+		'transition-colors',
+		'w-full',
+	],
 	{
 		variants: {
 			intent: {
