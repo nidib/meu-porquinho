@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CircleNotch, LockSimple, User } from '@phosphor-icons/react';
 
 import { Button } from 'src/components/button';
 import { Input } from 'src/components/input';
 import { Logo, LogoHeading } from 'src/components/logo';
-import trail from '../../assets/trail.png';
 
-const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
+export const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export function HomePage() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ export function HomePage() {
 
 	return (
 		<main
-			className={clsx(
+			className={clsx([
 				'flex',
 				'h-screen',
 				'w-screen',
@@ -33,15 +33,16 @@ export function HomePage() {
 				'bg-ceu-noite-100',
 				'px-12',
 				'md:px-8',
-				'overflow-hidden'
-			)}
+				'overflow-hidden',
+				'bg-stars',
+				'bg-center',
+				'bg-cover',
+				'bg-repeat-y',
+			])}
 		>
 			<div className="flex flex-col items-center gap-1 md:flex-col-reverse md:gap-12 lg:flex-row-reverse lg:items-start">
-				<div className="relative">
-					<div className="md:rotate-[30deg]">
-						<Logo />
-					</div>
-					<img src={trail} className="absolute right-[120px] top-[300px] hidden md:block" />
+				<div className="md:rotate-[30deg]">
+					<Logo />
 				</div>
 				<div className="flex flex-col gap-16">
 					<div>
@@ -51,12 +52,12 @@ export function HomePage() {
 					<p className="hidden font-thin text-gray-50 lg:block">
 						Se você ainda não tem uma conta,
 						<br /> registre-se{' '}
-						<a
-							href="#"
+						<Link
+							to={'/criar-conta'}
 							className="font-normal text-rosa-porquinho-100 underline hover:text-rosa-porquinho-200"
 						>
 							aqui!
-						</a>
+						</Link>
 					</p>
 				</div>
 			</div>
@@ -77,6 +78,9 @@ export function HomePage() {
 							{isLoading ? <CircleNotch weight="bold" className="animate-spin text-2xl" /> : 'Entrar'}
 						</div>
 					</Button>
+					<Link to={'/criar-conta'}>
+						<Button>Criar conta</Button>
+					</Link>
 					<Button intent={'ghost'}>Esqueci a senha</Button>
 				</div>
 			</form>
