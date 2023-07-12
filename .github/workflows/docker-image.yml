@@ -17,7 +17,8 @@ jobs:
       uses: cloudposse/github-action-docker-build-push@1.13.0
       with:
           registry: registry.hub.docker.com
-#           repository: "${{ github.event.repository.name }}"
+          organization: nidib
+          repository: meuporquinho-api
           login: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"
           platforms: linux/amd64,linux/arm64
