@@ -10,7 +10,7 @@ export function FullStarBg(props: Props) {
 	return (
 		<div
 			className={clsx([
-				'h-screen',
+				'min-h-screen',
 				'w-screen',
 				'bg-ceu-noite-100',
 				'bg-stars',
