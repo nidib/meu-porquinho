@@ -19,7 +19,7 @@ jobs:
         workdir: ./backend
         repository: nidib/meuporquinho-api
         image_name: nidib/meuporquinho-api
-        tags: nidib/meuporquinho-api
+#         tags: nidib/meuporquinho-api
         login: ${{ secrets.DOCKER.USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 #     - name: Build and push Docker image
