@@ -17,8 +17,9 @@ jobs:
       uses: docker/build-push-action@v4.1.1
       with:
         context: backend
+        file: ./Dockerfile
         push: true
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: nidib/meuporquinho-api
+        tags: nidib/meuporquinho-api:latest
         repository: nidib/meuporquinho-api
