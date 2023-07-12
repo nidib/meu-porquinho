@@ -16,19 +16,8 @@ jobs:
     - name: Docker build and push
       uses: cloudposse/github-action-docker-build-push@1.13.0
       with:
-        workdir: backend
-        repository: nidib/meuporquinho-api
-        image_name: nidib/meuporquinho-api
-#         tags: nidib/meuporquinho-api
-        login: ${{ secrets.DOCKER.USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-#     - name: Build and push Docker image
-#       uses: docker/build-push-action@v4.1.1
-#       with:
-#         context: backend
-#         file: ./backend/Dockerfile
-#         push: true
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
-#         tags: nidib/meuporquinho-api:latest
-#         repository: nidib/meuporquinho-api
+          registry: registry.hub.docker.com
+#           repository: "${{ github.event.repository.name }}"
+          login: "${{ secrets.DOCKER_USERNAME }}"
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          platforms: linux/amd64,linux/arm64
