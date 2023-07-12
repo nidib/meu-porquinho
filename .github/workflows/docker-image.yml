@@ -22,4 +22,4 @@ jobs:
           repository: meuporquinho-api
           login: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
