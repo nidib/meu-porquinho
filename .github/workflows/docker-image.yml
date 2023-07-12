@@ -16,7 +16,7 @@ jobs:
     - name: Docker build and push
       uses: cloudposse/github-action-docker-build-push@1.13.0
       with:
-        workdir: ./backend
+        workdir: backend
         repository: nidib/meuporquinho-api
         image_name: nidib/meuporquinho-api
 #         tags: nidib/meuporquinho-api
