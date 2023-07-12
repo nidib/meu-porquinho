@@ -20,4 +20,5 @@ jobs:
         push: true
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: nidib/meuporquinho-api:latest
         repository: nidib/meuporquinho-api
