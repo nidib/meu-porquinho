@@ -13,7 +13,7 @@ export function Section(props: Props) {
 	return (
 		<div>
 			<div className="flex items-center justify-between py-6 text-xl font-bold text-white">
-				<div className="uppercase">{title}</div>
+				<p className="uppercase">{title}</p>
 				<div className="flex gap-5">
 					{onPlusClick ? (
 						<a href="#">

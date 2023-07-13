@@ -15,13 +15,13 @@ function Protected(props: { children: JSX.Element }) {
 		setHasLoaded(true);
 	}, []);
 
-	// if (!hasLoaded) {
-	// 	return <p>Autenticando...</p>;
-	// }
+	if (!hasLoaded) {
+		return <p>Autenticando...</p>;
+	}
 
-	// if (!token) {
-	// 	return <Navigate to={'/'} />;
-	// }
+	if (!token) {
+		return <Navigate to={'/'} />;
+	}
 
 	return children;
 }

@@ -119,7 +119,6 @@ export function HomePage() {
 						<Link to={'/criar-conta'}>
 							<Button>Criar conta</Button>
 						</Link>
-						<Button intent={'ghost'}>Esqueci a senha</Button>
 					</div>
 				</form>
 			</main>

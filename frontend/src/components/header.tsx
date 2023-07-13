@@ -25,9 +25,9 @@ export function Header() {
 							'font-semibold',
 						])}
 					>
-						<div className={clsx('text-verde-100')}>{decimalToBRL(5793.75)}</div>
-						<div className="text-white opacity-20">|</div>
-						<div className={clsx('text-vermelho-100')}>{decimalToBRL(621.9)}</div>
+						<p className={clsx('text-verde-100')}>{decimalToBRL(5793.75)}</p>
+						<p className="text-white opacity-20">|</p>
+						<p className={clsx('text-vermelho-100')}>{decimalToBRL(621.9)}</p>
 					</div>
 				</div>
 			</div>
