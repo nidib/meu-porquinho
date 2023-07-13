@@ -9,7 +9,7 @@ import { FullStarBg } from 'src/components/full-star-bg';
 import { Input } from 'src/components/input';
 import { createUser } from 'src/gateways/api/usecases/create-user';
 
-const campoObrigatorio = {
+export const requiredField = {
 	required: {
 		value: true,
 		message: 'Campo obrigatório',
@@ -45,10 +45,11 @@ export function SignUpPage() {
 				senha: password,
 				email,
 			});
-			setIsLoading(false);
 			navigate('/');
 		} catch (e) {
 			console.log(e);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -61,28 +62,28 @@ export function SignUpPage() {
 						type="text"
 						placeholder="* Nome completo"
 						errorState={formState.errors.fullName?.message}
-						{...register('fullName', { ...campoObrigatorio })}
+						{...register('fullName', { ...requiredField })}
 					/>
 					<Input
 						id="birthday"
 						type="text"
 						placeholder="* Data de nascimento"
 						errorState={formState.errors.birthday?.message}
-						{...register('birthday', { ...campoObrigatorio })}
+						{...register('birthday', { ...requiredField })}
 					/>
 					<Input
 						id="username"
 						type="text"
 						placeholder="* Nome de usuário"
 						errorState={formState.errors.username?.message}
-						{...register('username', { ...campoObrigatorio })}
+						{...register('username', { ...requiredField })}
 					/>
 					<Input
 						id="email"
 						type="email"
 						placeholder="* E-mail"
 						errorState={formState.errors.email?.message}
-						{...register('email', { ...campoObrigatorio })}
+						{...register('email', { ...requiredField })}
 					/>
 					<Input
 						id="email-confirmation"
@@ -90,7 +91,7 @@ export function SignUpPage() {
 						placeholder="* Confirmar e-mail"
 						errorState={formState.errors.emailConfirmation?.message}
 						{...register('emailConfirmation', {
-							...campoObrigatorio,
+							...requiredField,
 							validate: (value, form) => value === form.email || 'Os e-emails estão diferentes',
 						})}
 					/>
@@ -107,7 +108,7 @@ export function SignUpPage() {
 						placeholder="* Confirmar senha"
 						errorState={formState.errors.passwordConfirmation?.message}
 						{...register('passwordConfirmation', {
-							...campoObrigatorio,
+							...requiredField,
 							validate: (value, form) => value === form.password || 'As senhas estão diferentes',
 						})}
 					/>
