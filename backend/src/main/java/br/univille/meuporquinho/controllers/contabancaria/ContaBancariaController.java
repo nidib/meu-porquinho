@@ -3,6 +3,7 @@ package br.univille.meuporquinho.controllers.contabancaria;
 import br.univille.meuporquinho.controllers.contabancaria.dtos.CriarContaBancariaReqDTO;
 import br.univille.meuporquinho.controllers.contabancaria.dtos.ContaBancariaResDTO;
 import br.univille.meuporquinho.controllers.contabancaria.dtos.EditarContaBancariaReqDTO;
+import br.univille.meuporquinho.controllers.contabancaria.dtos.ResumoContasBancariasResDTO;
 import br.univille.meuporquinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.meuporquinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import br.univille.meuporquinho.domains.contabancaria.ContaBancariaEntity;
@@ -76,6 +77,21 @@ public class ContaBancariaController {
 		this.contaBancariaService.remover(id, usuarioLogadoId);
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping("/resumo")
+	public ResponseEntity<List<ResumoContasBancariasResDTO>> resumo(@UsuarioLogadoId UUID usuarioLogadoId) {
+		List<ContaBancariaEntity> contasBancarias = this.contaBancariaService.obterDisponiveisPor(usuarioLogadoId);
+		List<ResumoContasBancariasResDTO> resumos = contasBancarias
+			.stream()
+			.map(c -> new ResumoContasBancariasResDTO(
+				c.getId(),
+				c.getTitulo(),
+				this.contaBancariaService.obterSaldoEmReaisDecimal(c.getSaldo())
+			))
+			.toList();
+
+		return new ResponseEntity<>(resumos, HttpStatus.OK);
 	}
 
 }

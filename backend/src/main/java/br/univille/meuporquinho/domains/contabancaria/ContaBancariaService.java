@@ -94,4 +94,9 @@ public class ContaBancariaService {
 		this.contaBancariaRepository.deleteById(contaBancaria.getId());
 	}
 
+	public List<ContaBancariaEntity> obterResumoDeTodasAsContas(UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+
+		return this.contaBancariaRepository.obterTodasPorUsuario(usuario);
+	}
 }

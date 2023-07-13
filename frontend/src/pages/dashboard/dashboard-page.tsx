@@ -1,6 +1,5 @@
 import { Dog, ForkKnife, Popcorn, TreePalm } from '@phosphor-icons/react';
 
-import { BanksSummary } from 'src/components/banks-summary';
 import { BorderedCard } from 'src/components/bordered-card';
 import { CategoriesSlider } from 'src/components/categories-slider';
 import { FullStarBg } from 'src/components/full-star-bg';
@@ -8,12 +7,7 @@ import { Header } from 'src/components/header';
 import { Section } from 'src/components/section';
 import { BarChart } from 'src/components/charts/bar';
 import { PieChart } from 'src/components/charts/pie';
-
-const banks = [
-	{ name: 'Itaú', balance: 27.83 },
-	{ name: 'Nubank', balance: 1700.3 },
-	{ name: 'Bradesco', balance: -146.94 },
-];
+import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
 
 const categories = [
 	{ name: 'Animais', icon: Dog },
@@ -44,7 +38,7 @@ export function DashboardPage() {
 				<div className="px-6">
 					<Section title="Contas" onPlusClick={noop} onArrowClick={noop}>
 						<BorderedCard>
-							<BanksSummary banks={banks} />
+							<AccountSummaryContainer />
 						</BorderedCard>
 					</Section>
 				</div>
