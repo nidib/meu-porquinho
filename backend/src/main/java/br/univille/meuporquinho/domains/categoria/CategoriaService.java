@@ -66,4 +66,10 @@ public class CategoriaService {
 		this.categoriaRepository.delete(categoriaExistente);
 	}
 
+	public CategoriaEntity obterPorIdEUsuario(UUID id, UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+
+		return this.obter(id, usuario);
+	}
+
 }
