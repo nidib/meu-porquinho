@@ -11,7 +11,7 @@ export function BorderedCard(props: Props) {
 		<div className="flex flex-col gap-6 rounded-2xl border-2 border-white border-opacity-20 p-6 shadow-md">
 			{title ? (
 				<p className="text-center text-lg font-semibold text-white text-opacity-40">
-					{title.toUpperCase()}{' '}
+					{title}{' '}
 					{notAvailable && (
 						<span className="ml-3 rounded-full bg-rosa-porquinho-100 p-1 text-sm text-ceu-noite-200">
 							Em breve

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { BorderedCard } from 'src/components/bordered-card';
 import { FullStarBg } from 'src/components/full-star-bg';
 import { Section } from 'src/components/section';
@@ -6,7 +8,6 @@ import { PieChart } from 'src/components/charts/pie';
 import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
 import { HeaderContainer } from 'src/components/header/header-container';
 import { CategoriesSliderContainer } from 'src/components/categories-slider/categories-slider-container';
-import { useNavigate } from 'react-router-dom';
 
 const barData = [
 	{ title: 'Ganhos', amount: 27.83 },
@@ -44,7 +45,7 @@ export function DashboardPage() {
 				<div className="px-6">
 					<Section title="GASTOS GERAIS">
 						<div className="flex flex-col gap-6">
-							<BorderedCard title="Gastos E Ganhos" notAvailable>
+							<BorderedCard title="Gastos e Ganhos" notAvailable>
 								<div className="select-none opacity-70 blur-sm">
 									<BarChart data={barData} />
 								</div>
