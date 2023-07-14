@@ -1,7 +1,8 @@
 import { Icon } from '@phosphor-icons/react';
+import { Category } from 'src/components/categories-slider/categories-slider-container';
 
 type Props = {
-	categories: { name: string; icon: Icon }[];
+	categories: (Category & { icon: Icon })[];
 };
 
 export function CategoriesSlider(props: Props) {

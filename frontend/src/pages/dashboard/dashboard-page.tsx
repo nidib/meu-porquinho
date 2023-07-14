@@ -1,21 +1,11 @@
-import { Dog, ForkKnife, Popcorn, TreePalm } from '@phosphor-icons/react';
-
 import { BorderedCard } from 'src/components/bordered-card';
-import { CategoriesSlider } from 'src/components/categories-slider';
 import { FullStarBg } from 'src/components/full-star-bg';
-import { Header } from 'src/components/header/header';
 import { Section } from 'src/components/section';
 import { BarChart } from 'src/components/charts/bar';
 import { PieChart } from 'src/components/charts/pie';
 import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
 import { HeaderContainer } from 'src/components/header/header-container';
-
-const categories = [
-	{ name: 'Animais', icon: Dog },
-	{ name: 'Alimentação', icon: ForkKnife },
-	{ name: 'Viagem', icon: TreePalm },
-	{ name: 'Lazer', icon: Popcorn },
-];
+import { CategoriesSliderContainer } from 'src/components/categories-slider/categories-slider-container';
 
 const barData = [
 	{ title: 'Ganhos', amount: 27.83 },
@@ -45,17 +35,21 @@ export function DashboardPage() {
 				</div>
 				<div className="px-6">
 					<Section title="Categorias" onPlusClick={noop} onArrowClick={noop}>
-						<CategoriesSlider categories={categories} />
+						<CategoriesSliderContainer />
 					</Section>
 				</div>
 				<div className="px-6">
-					<Section title="GASTOS GERAIS" onArrowClick={noop}>
+					<Section title="GASTOS GERAIS">
 						<div className="flex flex-col gap-6">
-							<BorderedCard title="Gastos gerais">
-								<BarChart data={barData} />
+							<BorderedCard title="Gastos gerais" notAvailable>
+								<div className="select-none opacity-70 blur-sm">
+									<BarChart data={barData} />
+								</div>
 							</BorderedCard>
-							<BorderedCard title="Gastos por categoria">
-								<PieChart data={pieData} />
+							<BorderedCard title="Gastos por categoria" notAvailable>
+								<div className="z-0 select-none opacity-70 blur-sm">
+									<PieChart data={pieData} />
+								</div>
 							</BorderedCard>
 						</div>
 					</Section>
