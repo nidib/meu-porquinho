@@ -81,11 +81,14 @@ CREATE TABLE "main"."conta_bancaria" (
 
 CREATE TABLE "main"."movimentacao" (
 	"id" UUID DEFAULT gen_random_uuid(),
+	"nome" VARCHAR(50) NOT NULL,
 	"valor" BIGINT NOT NULL,
 	"data" DATE NOT NULL,
 	"data_de_conclusao" DATE,
-	"frequencia_id" UUID,
 	"conta_bancaria_id" UUID NOT NULL,
+	"categoria_id" UUID NOT NULL,
+	"frequencia_id" UUID,
+	"prioridade_id" UUID,
 	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -94,34 +97,8 @@ CREATE TABLE "main"."movimentacao" (
 
 	PRIMARY KEY ("id"),
 	FOREIGN KEY ("conta_bancaria_id") REFERENCES "main"."conta_bancaria" ("id") ON DELETE CASCADE,
-	FOREIGN KEY ("frequencia_id") REFERENCES "main"."frequencia" ("id") ON DELETE SET NULL
-);
-
-CREATE TABLE "main"."receita" (
-	"id" UUID DEFAULT gen_random_uuid(),
-	"descricao" CHARACTER VARYING(255),
-	"categoria_id" UUID,
-	"movimentacao_id" UUID NOT NULL,
-	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-	PRIMARY KEY ("id"),
-	FOREIGN KEY ("movimentacao_id") REFERENCES "main"."movimentacao" ("id") ON DELETE CASCADE,
-	FOREIGN KEY ("categoria_id") REFERENCES "main"."categoria" ("id") ON DELETE SET NULL
-);
-
-CREATE TABLE IF NOT EXISTS "main"."gasto" (
-	"id" UUID DEFAULT gen_random_uuid(),
-	"descricao" CHARACTER VARYING(255),
-	"categoria_id" UUID,
-	"prioridade_id" UUID,
-	"movimentacao_id" UUID NOT NULL,
-	"criado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"atualizado_em" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-	PRIMARY KEY ("id"),
-	FOREIGN KEY ("movimentacao_id") REFERENCES "main"."movimentacao" ("id") ON DELETE CASCADE,
-	FOREIGN KEY ("categoria_id") REFERENCES "main"."categoria" ("id") ON DELETE SET NULL,
+	FOREIGN KEY ("categoria_id") REFERENCES "main"."categoria" ("id") ON DELETE CASCADE,
+	FOREIGN KEY ("frequencia_id") REFERENCES "main"."frequencia" ("id") ON DELETE SET NULL,
 	FOREIGN KEY ("prioridade_id") REFERENCES "main"."prioridade" ("id") ON DELETE SET NULL
 );
 

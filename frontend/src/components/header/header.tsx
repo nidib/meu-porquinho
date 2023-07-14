@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { LoadingSpinner } from 'src/components/loading-spinner';
 
 import { MetaTheme } from 'src/components/meta-theme';
 import { decimalToBRL } from 'src/utils/currency';
@@ -6,10 +7,11 @@ import { decimalToBRL } from 'src/utils/currency';
 type Props = {
 	income: number;
 	expense: number;
+	loading?: boolean;
 };
 
 export function Header(props: Props) {
-	const { income, expense } = props;
+	const { income, expense, loading = false } = props;
 	const hasIncome = income !== 0;
 	const hasExpense = expense !== 0;
 
@@ -35,18 +37,28 @@ export function Header(props: Props) {
 							'font-semibold',
 						])}
 					>
-						{hasIncome || hasExpense ? (
-							<>
-								<p className={clsx([hasIncome ? 'text-verde-100' : 'text-white opacity-20'])}>
-									{hasIncome ? decimalToBRL(income) : '-'}
-								</p>
-								<p className="text-white opacity-20">|</p>
-								<p className={clsx([hasExpense ? 'text-vermelho-100' : 'text-white opacity-20'])}>
-									{hasExpense ? decimalToBRL(expense) : '-'}
-								</p>
-							</>
+						{loading ? (
+							<LoadingSpinner />
 						) : (
-							<p className="text-white opacity-20">Nenhum saldo.</p>
+							<>
+								{hasIncome || hasExpense ? (
+									<>
+										<p className={clsx([hasIncome ? 'text-verde-100' : 'text-white opacity-20'])}>
+											{hasIncome ? decimalToBRL(income) : '-'}
+										</p>
+										<p className="text-white opacity-20">|</p>
+										<p
+											className={clsx([
+												hasExpense ? 'text-vermelho-100' : 'text-white opacity-20',
+											])}
+										>
+											{hasExpense ? decimalToBRL(expense) : '-'}
+										</p>
+									</>
+								) : (
+									<p className="text-white opacity-20">Nenhum saldo.</p>
+								)}
+							</>
 						)}
 					</div>
 				</div>
