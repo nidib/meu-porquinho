@@ -5,16 +5,15 @@ import { decimalToBRL } from 'src/utils/currency';
 
 type Props = {
 	accounts: AccountSummary[];
+	emptyMessage: string;
 };
 
 export function AccountSummary(props: Props) {
-	const { accounts } = props;
+	const { accounts, emptyMessage } = props;
 
 	return (
 		<ul className="flex flex-col gap-1 text-lg text-white">
-			{accounts.length === 0 ? (
-				<p className="text-center text-white opacity-20">Nenhuma conta bancária criada.</p>
-			) : null}
+			{accounts.length === 0 ? <p className="text-center text-white opacity-20">{emptyMessage}</p> : null}
 			{accounts.map((account) => (
 				<li key={account.title} className="flex justify-between">
 					<p>{account.title}</p>

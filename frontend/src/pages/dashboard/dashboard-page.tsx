@@ -6,6 +6,7 @@ import { PieChart } from 'src/components/charts/pie';
 import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
 import { HeaderContainer } from 'src/components/header/header-container';
 import { CategoriesSliderContainer } from 'src/components/categories-slider/categories-slider-container';
+import { useNavigate } from 'react-router-dom';
 
 const barData = [
 	{ title: 'Ganhos', amount: 27.83 },
@@ -19,16 +20,18 @@ const pieData = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {};
+export const noop = () => {};
 
 export function DashboardPage() {
+	const navigate = useNavigate();
+
 	return (
 		<FullStarBg hideStars>
 			<HeaderContainer />
 			<div className="mt-3 flex flex-col gap-4 pb-10">
 				<div className="px-6">
-					<Section title="Contas" onPlusClick={noop} onArrowClick={noop}>
-						<BorderedCard>
+					<Section title="Contas" onPlusClick={noop} onArrowClick={() => navigate('/contas')}>
+						<BorderedCard title="Saldos">
 							<AccountSummaryContainer />
 						</BorderedCard>
 					</Section>
@@ -41,7 +44,7 @@ export function DashboardPage() {
 				<div className="px-6">
 					<Section title="GASTOS GERAIS">
 						<div className="flex flex-col gap-6">
-							<BorderedCard title="Gastos gerais" notAvailable>
+							<BorderedCard title="Gastos E Ganhos" notAvailable>
 								<div className="select-none opacity-70 blur-sm">
 									<BarChart data={barData} />
 								</div>

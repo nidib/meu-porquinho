@@ -16,12 +16,12 @@ export function Section(props: Props) {
 				<p className="uppercase">{title}</p>
 				<div className="flex gap-5">
 					{onPlusClick ? (
-						<a href="#">
+						<a onClick={() => onPlusClick()}>
 							<Plus weight="bold" size={'1.75rem'} />
 						</a>
 					) : null}
 					{onArrowClick ? (
-						<a href="#">
+						<a onClick={() => onArrowClick()}>
 							<CaretRight weight="bold" size={'1.75rem'} />
 						</a>
 					) : null}

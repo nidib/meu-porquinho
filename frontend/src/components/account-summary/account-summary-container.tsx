@@ -28,5 +28,5 @@ export function AccountSummaryContainer() {
 		return <LoadingSpinner />;
 	}
 
-	return <AccountSummary accounts={accountsSummaries} />;
+	return <AccountSummary accounts={accountsSummaries} emptyMessage="Nenhuma conta bancária criada." />;
 }

@@ -4,6 +4,7 @@ import { HomePage } from 'src/pages/home/home-page';
 import { SignUpPage } from 'src/pages/sign-up/sign-up-page';
 import { DashboardPage } from 'src/pages/dashboard/dashboard-page';
 import { useEffect, useState } from 'react';
+import { BankAccountsPage } from 'src/pages/bank-accounts/bank-accounts-page';
 
 function Protected(props: { children: JSX.Element }) {
 	const { children } = props;
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
 		element: (
 			<Protected>
 				<DashboardPage />
+			</Protected>
+		),
+	},
+	{
+		path: '/contas',
+		element: (
+			<Protected>
+				<BankAccountsPage />
 			</Protected>
 		),
 	},
