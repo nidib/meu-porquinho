@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
 import { BorderedCard } from 'src/components/bordered-card';
 import { FullStarBg } from 'src/components/full-star-bg';
@@ -6,12 +7,14 @@ import { MovementsContainer } from 'src/components/movements/movements-container
 import { Section } from 'src/components/section';
 
 export function BankAccountsPage() {
+	const navigate = useNavigate();
+
 	return (
 		<FullStarBg hideStars>
 			<HeaderContainer />
 			<div className="mt-3 flex flex-col gap-4 pb-10">
 				<div className="px-6">
-					<Section title="Contas">
+					<Section title="Contas" onPlusClick={() => navigate('/criar-conta-bancaria')}>
 						<div className="flex flex-col gap-6">
 							<BorderedCard title="Saldos">
 								<AccountSummaryContainer />

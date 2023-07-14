@@ -20,9 +20,6 @@ const pieData = [
 	{ title: 'Viagem', amount: 36.74, color: '#FF63DD' },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = () => {};
-
 export function DashboardPage() {
 	const navigate = useNavigate();
 
@@ -31,14 +28,18 @@ export function DashboardPage() {
 			<HeaderContainer />
 			<div className="mt-3 flex flex-col gap-4 pb-10">
 				<div className="px-6">
-					<Section title="Contas" onPlusClick={noop} onArrowClick={() => navigate('/contas')}>
+					<Section
+						title="Contas"
+						onPlusClick={() => navigate('/criar-conta-bancaria')}
+						onArrowClick={() => navigate('/contas')}
+					>
 						<BorderedCard title="Saldos">
 							<AccountSummaryContainer />
 						</BorderedCard>
 					</Section>
 				</div>
 				<div className="px-6">
-					<Section title="Categorias" onPlusClick={noop} onArrowClick={noop}>
+					<Section title="Categorias">
 						<CategoriesSliderContainer />
 					</Section>
 				</div>
