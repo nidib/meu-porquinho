@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { HomePage } from 'src/pages/home/home-page';
 import { SignUpPage } from 'src/pages/sign-up/sign-up-page';
 import { DashboardPage } from 'src/pages/dashboard/dashboard-page';
-import { useEffect, useState } from 'react';
 import { BankAccountsPage } from 'src/pages/bank-accounts/bank-accounts-page';
+import { CreateBankAccountPage } from 'src/pages/create-bank-account/create-bank-account-page';
 
 function Protected(props: { children: JSX.Element }) {
 	const { children } = props;
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
 		element: (
 			<Protected>
 				<BankAccountsPage />
+			</Protected>
+		),
+	},
+	{
+		path: '/criar-conta-bancaria',
+		element: (
+			<Protected>
+				<CreateBankAccountPage />
 			</Protected>
 		),
 	},
