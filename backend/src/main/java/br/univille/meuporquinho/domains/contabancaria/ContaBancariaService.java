@@ -1,5 +1,7 @@
 package br.univille.meuporquinho.domains.contabancaria;
 
+import br.univille.meuporquinho.controllers.contabancaria.dtos.SaldoContasBancariasResDTO;
+import br.univille.meuporquinho.domains.contabancaria.repositorydtos.SaldoContas;
 import br.univille.meuporquinho.domains.usuario.UsuarioEntity;
 import br.univille.meuporquinho.domains.usuario.UsuarioService;
 import br.univille.meuporquinho.exceptions.RegraDeNegocioException;
@@ -46,6 +48,10 @@ public class ContaBancariaService {
 	}
 
 	public double obterSaldoEmReaisDecimal(long saldo) {
+		return saldo / 100.0;
+	}
+
+	public double obterSaldoEmReaisDecimal(double saldo) {
 		return saldo / 100.0;
 	}
 
@@ -97,6 +103,12 @@ public class ContaBancariaService {
 	public List<ContaBancariaEntity> obterResumoDeTodasAsContas(UUID usuarioId) {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
 
-		return this.contaBancariaRepository.obterTodasPorUsuario(usuario);
+		return this.contaBancariaRepository.obterTodasPorUsuarioOrdenadasPorSaldo(usuario);
+	}
+
+	public SaldoContas obterSaldoDasContas(UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+
+		return this.contaBancariaRepository.obterSaldoDasContas(usuario);
 	}
 }

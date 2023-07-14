@@ -7,11 +7,5 @@ type GetAccountsSummariesRes = {
 }[];
 
 export async function getAccountsSummaries(): Promise<GetAccountsSummariesRes> {
-	return api
-		.get<GetAccountsSummariesRes>('/api/conta-bancaria/resumo', {
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem('token') ?? ''}`,
-			},
-		})
-		.then((response) => response.data);
+	return api.get<GetAccountsSummariesRes>('/api/conta-bancaria/resumo').then((response) => response.data);
 }

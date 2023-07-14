@@ -1,13 +1,11 @@
 package br.univille.meuporquinho.controllers.contabancaria;
 
-import br.univille.meuporquinho.controllers.contabancaria.dtos.CriarContaBancariaReqDTO;
-import br.univille.meuporquinho.controllers.contabancaria.dtos.ContaBancariaResDTO;
-import br.univille.meuporquinho.controllers.contabancaria.dtos.EditarContaBancariaReqDTO;
-import br.univille.meuporquinho.controllers.contabancaria.dtos.ResumoContasBancariasResDTO;
+import br.univille.meuporquinho.controllers.contabancaria.dtos.*;
 import br.univille.meuporquinho.domains.autenticacao.annotations.PrecisaEstarLogado;
 import br.univille.meuporquinho.domains.autenticacao.annotations.UsuarioLogadoId;
 import br.univille.meuporquinho.domains.contabancaria.ContaBancariaEntity;
 import br.univille.meuporquinho.domains.contabancaria.ContaBancariaService;
+import br.univille.meuporquinho.domains.contabancaria.repositorydtos.SaldoContas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,7 +79,7 @@ public class ContaBancariaController {
 
 	@GetMapping("/resumo")
 	public ResponseEntity<List<ResumoContasBancariasResDTO>> resumo(@UsuarioLogadoId UUID usuarioLogadoId) {
-		List<ContaBancariaEntity> contasBancarias = this.contaBancariaService.obterDisponiveisPor(usuarioLogadoId);
+		List<ContaBancariaEntity> contasBancarias = this.contaBancariaService.obterResumoDeTodasAsContas(usuarioLogadoId);
 		List<ResumoContasBancariasResDTO> resumos = contasBancarias
 			.stream()
 			.map(c -> new ResumoContasBancariasResDTO(
@@ -92,6 +90,19 @@ public class ContaBancariaController {
 			.toList();
 
 		return new ResponseEntity<>(resumos, HttpStatus.OK);
+	}
+
+	@GetMapping("/saldo")
+	public ResponseEntity<SaldoContasBancariasResDTO> saldo(@UsuarioLogadoId UUID usuarioLogadoId) {
+		SaldoContas saldo = this.contaBancariaService.obterSaldoDasContas(usuarioLogadoId);
+
+		return new ResponseEntity<>(
+			new SaldoContasBancariasResDTO(
+				this.contaBancariaService.obterSaldoEmReaisDecimal(saldo.ganhos),
+				this.contaBancariaService.obterSaldoEmReaisDecimal(saldo.gastos)
+			),
+			HttpStatus.OK
+		);
 	}
 
 }

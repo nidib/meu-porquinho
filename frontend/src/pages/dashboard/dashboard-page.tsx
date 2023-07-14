@@ -3,11 +3,12 @@ import { Dog, ForkKnife, Popcorn, TreePalm } from '@phosphor-icons/react';
 import { BorderedCard } from 'src/components/bordered-card';
 import { CategoriesSlider } from 'src/components/categories-slider';
 import { FullStarBg } from 'src/components/full-star-bg';
-import { Header } from 'src/components/header';
+import { Header } from 'src/components/header/header';
 import { Section } from 'src/components/section';
 import { BarChart } from 'src/components/charts/bar';
 import { PieChart } from 'src/components/charts/pie';
 import { AccountSummaryContainer } from 'src/components/account-summary/account-summary-container';
+import { HeaderContainer } from 'src/components/header/header-container';
 
 const categories = [
 	{ name: 'Animais', icon: Dog },
@@ -33,7 +34,7 @@ const noop = () => {};
 export function DashboardPage() {
 	return (
 		<FullStarBg hideStars>
-			<Header />
+			<HeaderContainer />
 			<div className="mt-3 flex flex-col gap-4 pb-10">
 				<div className="px-6">
 					<Section title="Contas" onPlusClick={noop} onArrowClick={noop}>
