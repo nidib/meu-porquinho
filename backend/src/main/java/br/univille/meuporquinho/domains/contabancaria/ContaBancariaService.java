@@ -43,7 +43,7 @@ public class ContaBancariaService {
 		}
 	}
 
-	private long obterSaldoEmCentavos(double saldo) {
+	public long obterSaldoEmCentavos(double saldo) {
 		return (long) (saldo * 100);
 	}
 
@@ -110,5 +110,11 @@ public class ContaBancariaService {
 		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
 
 		return this.contaBancariaRepository.obterSaldoDasContas(usuario);
+	}
+
+	public ContaBancariaEntity obterPorIdEUsuario(UUID contaBancariaId, UUID usuarioId) {
+		UsuarioEntity usuario = this.usuarioService.obterUsuario(usuarioId);
+
+		return this.obter(contaBancariaId, usuario);
 	}
 }

@@ -62,6 +62,15 @@ public class MovimentacaoEntity {
 
 	public MovimentacaoEntity() {}
 
+	public MovimentacaoEntity(String nome, long valor, LocalDate data, LocalDate dataDeConclusao, ContaBancariaEntity contaBancaria, CategoriaEntity categoria) {
+		this.nome = nome;
+		this.valor = valor;
+		this.data = data;
+		this.dataDeConclusao = dataDeConclusao;
+		this.contaBancaria = contaBancaria;
+		this.categoria = categoria;
+	}
+
 	public UUID getId() {
 		return this.id;
 	}
